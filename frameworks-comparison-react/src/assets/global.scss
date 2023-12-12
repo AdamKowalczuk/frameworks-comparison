@@ -1,4 +1,91 @@
 body {
-    margin: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button{
+  cursor: pointer;
+  outline: none;
+}
+
+// Font styles
+
+h1 {
+  font-weight: 700;
+  font-size: 60px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 48px;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 36px;
+}
+
+h4 {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+h6 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.bold-xl {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.bold-lg {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.bold-md {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.bold-sm {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.bold-xs {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.normal-xl {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.normal-lg {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.normal-md {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.normal-sm {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.normal-xs {
+  font-weight: 500;
+  font-size: 12px;
+}
