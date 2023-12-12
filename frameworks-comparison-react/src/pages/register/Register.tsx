@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import "./Register.scss";
-// import Button from "../../components/Button/Button";
+import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
 
 const Register = () => {
@@ -53,7 +53,7 @@ const Register = () => {
             <input type="password" id="password" value={password} onChange={handlePasswordChange} />
           </div>
 
-          {/* <Button text="Sign Up" onClick={handleSignUp} /> */}
+          <Button text="Sign Up" onClick={handleSignUp} />
         </form>
         <div className="login-link">
           <span>Already have an account? </span>
