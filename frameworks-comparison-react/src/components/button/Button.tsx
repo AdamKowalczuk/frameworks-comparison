@@ -11,7 +11,9 @@ type ButtonProps = {
 const Button = ({ text, variant = "primary", onClick, size = "medium" }: ButtonProps) => {
   return (
     <>
-      <button className={["custom-button", `custom-button--${variant}`, `custom-button--${size}`].join(" ")}>{text}</button>
+      <button className={["custom-button", `custom-button--${variant}`, `custom-button--${size}`].join(" ")} onClick={onClick}>
+        {text}
+      </button>
     </>
   );
 };
