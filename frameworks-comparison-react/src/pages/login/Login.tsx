@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent } from "react";
 import "./Login.scss";
-import Button from "../../components/Button/Button";
+// import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
 
 const Login = () => {
@@ -34,7 +34,7 @@ const Login = () => {
               <label htmlFor="password">Password</label>
               <input type="password" id="password" value={password} onChange={handlePasswordChange} />
             </div>
-            <Button text="Log in" onClick={handleLogin} />
+            {/* <Button text="Log in" onClick={handleLogin} /> */}
           </form>
           <div className="signup-link">
             <span>Don’t have an account?</span> <TextButton text="Sign Up" />
