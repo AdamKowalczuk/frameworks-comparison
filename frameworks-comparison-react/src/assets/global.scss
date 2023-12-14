@@ -1,9 +1,16 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
   margin: 0;
   box-sizing: border-box;
 }
+body {
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
 
-button{
+button {
   cursor: pointer;
   outline: none;
 }
@@ -88,4 +95,25 @@ h6 {
 .normal-xs {
   font-weight: 500;
   font-size: 12px;
+}
+
+// Colors
+
+.gray-50 {
+  color: #f7fafc;
+}
+.gray-100 {
+  color: #edf2f7;
+}
+.gray-200 {
+  color: #e2e8f0;
+}
+.gray-400 {
+  color: #a0aec0;
+}
+.gray-500 {
+  color: #718096;
+}
+.gray-700 {
+  color: #2d3748;
 }

@@ -1,1 +1,25 @@
 @import 'src/assets/variables.scss';
+
+.signup-page {
+  .left-side {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+
+    .signup-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .form-group {
+        // width: 100%;
+      }
+    }
+  }
+  .right-side {
+    width: 50%;
+  }
+}
