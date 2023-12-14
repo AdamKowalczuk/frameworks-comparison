@@ -1,13 +1,15 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent } from 'react'
 
 type TextareaProps = {
-  value: string;
-  placeholder?: string;
-  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-};
+  value: string
+  placeholder?: string
+  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
+}
 
 const Textarea = ({ value, placeholder, onChange }: TextareaProps) => {
-  return <textarea value={value} placeholder={placeholder} onChange={onChange} />;
-};
+  return (
+    <textarea value={value} placeholder={placeholder} onChange={onChange} />
+  )
+}
 
-export default Textarea;
+export default Textarea

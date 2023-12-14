@@ -1,7 +1,8 @@
 import React, { useState, ChangeEvent } from "react";
 import "./Register.scss";
-// import Button from "../../components/Button/Button";
+import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
+import InputText from "../../components/InputText/InputText";
 
 const Register = () => {
   const [name, setName] = useState<string>("");
@@ -32,28 +33,24 @@ const Register = () => {
       <div className="left-side">
         <div className="logo">Logo</div>
         <div className="signup-header">
-          <h2>Create a new account</h2>
-          <p>Please enter your details</p>
+          <h4>Create a new account</h4>
+          <p className="normal-md gray-500">Please enter your details</p>
         </div>
         <form className="signup-form">
           <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input type="text" id="name" value={name} onChange={handleNameChange} />
+            <InputText label="Name" placeholder="name" onChange={handleNameChange} value={name} />
           </div>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" value={username} onChange={handleUsernameChange} />
+            <InputText label="Username" placeholder="username" onChange={handleUsernameChange} value={username} />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={email} onChange={handleEmailChange} />
+            <InputText label="Email" placeholder="email" onChange={handleEmailChange} value={email} />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+            <InputText label="Password" placeholder="password" onChange={handlePasswordChange} value={password} />
           </div>
 
-          {/* <Button text="Sign Up" onClick={handleSignUp} /> */}
+          <Button text="Sign Up" onClick={handleSignUp} />
         </form>
         <div className="login-link">
           <span>Already have an account? </span>
