@@ -1,22 +1,22 @@
-import React, { useState, ChangeEvent } from 'react'
-import './Login.scss'
-import Button from '../../components/Button/Button'
-import TextButton from '../../components/TextButton/TextButton'
-import InputText from '../../components/InputText/InputText'
+import React, { useState, ChangeEvent } from "react";
+import "./Login.scss";
+import Button from "../../components/Button/Button";
+import TextButton from "../../components/TextButton/TextButton";
+import InputText from "../../components/InputText/InputText";
 
 const Login = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
-  const handleLogin = () => {}
+  const handleLogin = () => {};
 
   return (
     <>
@@ -57,7 +57,7 @@ const Login = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

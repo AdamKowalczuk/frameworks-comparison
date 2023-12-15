@@ -38,16 +38,36 @@ const Register = () => {
         </div>
         <form className="signup-form">
           <div className="form-group">
-            <InputText label="Name" placeholder="name" onChange={handleNameChange} value={name} />
+            <InputText
+              label="Name"
+              placeholder="name"
+              onChange={handleNameChange}
+              value={name}
+            />
           </div>
           <div className="form-group">
-            <InputText label="Username" placeholder="username" onChange={handleUsernameChange} value={username} />
+            <InputText
+              label="Username"
+              placeholder="username"
+              onChange={handleUsernameChange}
+              value={username}
+            />
           </div>
           <div className="form-group">
-            <InputText label="Email" placeholder="email" onChange={handleEmailChange} value={email} />
+            <InputText
+              label="Email"
+              placeholder="email"
+              onChange={handleEmailChange}
+              value={email}
+            />
           </div>
           <div className="form-group">
-            <InputText label="Password" placeholder="password" onChange={handlePasswordChange} value={password} />
+            <InputText
+              label="Password"
+              placeholder="password"
+              onChange={handlePasswordChange}
+              value={password}
+            />
           </div>
 
           <Button text="Sign Up" onClick={handleSignUp} />
@@ -58,7 +78,9 @@ const Register = () => {
         </div>
       </div>
 
-      <div className="right-side">{/* <img src="path/to/image.jpg" alt="Background" /> */}</div>
+      <div className="right-side">
+        {/* <img src="path/to/image.jpg" alt="Background" /> */}
+      </div>
     </div>
   );
 };
