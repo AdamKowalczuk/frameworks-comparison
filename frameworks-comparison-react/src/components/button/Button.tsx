@@ -10,9 +10,23 @@ type ButtonProps = {
   iconRight?: JSX.Element;
 };
 
-const Button = ({ text, variant = "primary", onClick, size = "medium", iconLeft, iconRight }: ButtonProps) => {
+const Button = ({
+  text,
+  variant = "primary",
+  onClick,
+  size = "medium",
+  iconLeft,
+  iconRight,
+}: ButtonProps) => {
   return (
-    <button className={["custom-button", `custom-button--${variant}`, `custom-button--${size}`].join(" ")} onClick={onClick}>
+    <button
+      className={[
+        "custom-button",
+        `custom-button--${variant}`,
+        `custom-button--${size}`,
+      ].join(" ")}
+      onClick={onClick}
+    >
       {iconLeft}
       {text}
       {iconRight}
