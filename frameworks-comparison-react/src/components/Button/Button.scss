@@ -3,7 +3,7 @@
 .custom-button {
   cursor: pointer;
   outline: none;
-  border: none;
+  border: 1px solid $primary-500;
 
   display: flex;
 
@@ -22,6 +22,16 @@
 }
 .custom-button--primary:hover {
   background-color: $primary-700;
+}
+
+.custom-button--outlined {
+  background-color: transparent;
+  color: $primary-500;
+}
+
+.custom-button--outlined:hover {
+  color: $primary-700;
+  border-color: $primary-700;
 }
 
 .custom-button--small {

@@ -1,1 +1,47 @@
 @import "src/assets/scss/variables.scss";
+
+.textarea-container {
+  .textarea-label {
+    color: $black;
+  }
+
+  .textarea-label--small {
+    font-size: 14px;
+  }
+
+  .textarea-label--medium {
+    font-size: 16px;
+  }
+
+  .textarea-label--large {
+    font-size: 18px;
+  }
+
+  .textarea-text {
+    border: 1px solid $gray-200;
+    color: $gray-400;
+    padding: 0 16px;
+    outline: none;
+  }
+  .textarea-text:focus,
+  .textarea-text:hover,
+  .textarea-text:active {
+    border-color: $primary-500;
+    border-width: 1px;
+  }
+
+  .textarea-text--small {
+    min-height: 32px;
+    border-radius: 4px;
+  }
+
+  .textarea-text--medium {
+    min-height: 40px;
+    border-radius: 4px;
+  }
+
+  .textarea-text--large {
+    min-height: 48px;
+    border-radius: 6px;
+  }
+}
