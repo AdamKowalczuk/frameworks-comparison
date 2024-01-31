@@ -1,1 +1,46 @@
 @import "src/assets/scss/variables.scss";
+
+.left-sidebar {
+  background-color: $primary-500;
+  display: flex;
+  min-width: 270px;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .left-sidebar-link {
+    border-radius: 0.5rem;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+      backdrop-filter, -webkit-backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 140%;
+    color: $white;
+
+    a {
+      display: flex;
+      padding: 1rem;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+  .left-sidebar-link--active {
+    background-color: $primary-700;
+  }
+}

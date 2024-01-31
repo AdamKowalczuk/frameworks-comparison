@@ -11,10 +11,12 @@ import EditPost from "./pages/EditPost/EditPost";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import Profile from "./pages/Profile/Profile";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile";
+import LeftSidebar from "./components/LeftSidebar/LeftSidebar";
 
 function App() {
   return (
     <div className="App">
+      <LeftSidebar />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/sign-in" element={<Login />} />
