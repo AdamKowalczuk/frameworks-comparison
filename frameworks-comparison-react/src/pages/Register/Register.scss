@@ -8,6 +8,11 @@
     gap: 20px;
     align-items: center;
 
+    .logo {
+      color: $primary-500;
+      font-size: 40px;
+    }
+
     .signup-form {
       width: 100%;
       display: flex;

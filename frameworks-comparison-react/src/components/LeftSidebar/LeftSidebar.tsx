@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { sidebarLinks } from "../../constants/index";
 import { INavLink } from "../../types";
-import Logo from "../../assets/images/logo.svg";
+
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 
 const LeftSidebar = () => {
@@ -15,7 +15,7 @@ const LeftSidebar = () => {
     <nav className="left-sidebar">
       <div>
         <Link to="/">
-          <img src={Logo} alt="logo" width={170} height={36} />
+          <h4>PostShare</h4>
         </Link>
 
         <Link to={`/profile/111`}>

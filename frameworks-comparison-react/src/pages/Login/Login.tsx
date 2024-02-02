@@ -3,10 +3,20 @@ import "./Login.scss";
 import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
+import { login } from "../actions/auth";
 
 const Login = () => {
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { message } = useSelector((state) => state.message);
+
+  const dispatch = useDispatch();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -16,35 +26,46 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = () => {};
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    form.current.validateAll();
+
+    if (checkBtn.current.context._errors.length === 0) {
+      dispatch(login(username, password))
+        .then(() => {
+          navigate("/profile");
+          window.location.reload();
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
+  };
+
+  if (isLoggedIn) {
+    return <Navigate to="/profile" />;
+  }
 
   return (
     <>
       <div className="login-page">
         <div className="left-side">
-          <div className="logo">Logo</div>
+          <h2 className="logo">PostShare</h2>
           <div className="login-header"></div>
           <h4>Log in to your account</h4>
 
-          <p className="normal-md gray-500">
-            Welcome back! Please enter your details
-          </p>
-          <form className="login-form">
+          <p className="normal-md gray-500">Welcome back! Please enter your details</p>
+          <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
-              <InputText
-                label="Email"
-                placeholder="email"
-                onChange={handleEmailChange}
-                value={email}
-              />
+              <InputText label="Email" placeholder="email" onChange={handleEmailChange} value={email} />
             </div>
             <div className="form-group">
-              <InputText
-                label="Password"
-                placeholder="password"
-                onChange={handlePasswordChange}
-                value={password}
-              />
+              <InputText label="Password" placeholder="password" onChange={handlePasswordChange} value={password} />
             </div>
             <Button text="Log in" onClick={handleLogin} />
           </form>
@@ -52,9 +73,7 @@ const Login = () => {
             <span>Don’t have an account?</span> <TextButton text="Sign Up" />
           </div>
         </div>
-        <div className="right-side">
-          {/* <img src="path/to/image.jpg" alt="Background" /> */}
-        </div>
+        <div className="right-side">{/* <img src="path/to/image.jpg" alt="Background" /> */}</div>
       </div>
     </>
   );

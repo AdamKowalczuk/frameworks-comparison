@@ -3,12 +3,17 @@ import "./Register.scss";
 import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../actions/auth";
 
 const Register = () => {
   const [name, setName] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const { message } = useSelector((state) => state.message);
+  const dispatch = useDispatch();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -26,48 +31,44 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
-  const handleSignUp = () => {};
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    setSuccessful(false);
+
+    form.current.validateAll();
+
+    if (checkBtn.current.context._errors.length === 0) {
+      dispatch(register(username, email, password))
+        .then(() => {
+          setSuccessful(true);
+        })
+        .catch(() => {
+          setSuccessful(false);
+        });
+    }
+  };
 
   return (
     <div className="signup-page">
       <div className="left-side">
-        <div className="logo">Logo</div>
+        <h2 className="logo">PostShare</h2>
         <div className="signup-header">
           <h4>Create a new account</h4>
           <p className="normal-md gray-500">Please enter your details</p>
         </div>
-        <form className="signup-form">
+        <form onSubmit={handleRegister} className="signup-form">
           <div className="form-group">
-            <InputText
-              label="Name"
-              placeholder="name"
-              onChange={handleNameChange}
-              value={name}
-            />
+            <InputText label="Name" placeholder="name" onChange={handleNameChange} value={name} />
           </div>
           <div className="form-group">
-            <InputText
-              label="Username"
-              placeholder="username"
-              onChange={handleUsernameChange}
-              value={username}
-            />
+            <InputText label="Username" placeholder="username" onChange={handleUsernameChange} value={username} />
           </div>
           <div className="form-group">
-            <InputText
-              label="Email"
-              placeholder="email"
-              onChange={handleEmailChange}
-              value={email}
-            />
+            <InputText label="Email" placeholder="email" onChange={handleEmailChange} value={email} />
           </div>
           <div className="form-group">
-            <InputText
-              label="Password"
-              placeholder="password"
-              onChange={handlePasswordChange}
-              value={password}
-            />
+            <InputText label="Password" placeholder="password" onChange={handlePasswordChange} value={password} />
           </div>
 
           <Button text="Sign Up" onClick={handleSignUp} />
@@ -78,9 +79,7 @@ const Register = () => {
         </div>
       </div>
 
-      <div className="right-side">
-        {/* <img src="path/to/image.jpg" alt="Background" /> */}
-      </div>
+      <div className="right-side">{/* <img src="path/to/image.jpg" alt="Background" /> */}</div>
     </div>
   );
 };
