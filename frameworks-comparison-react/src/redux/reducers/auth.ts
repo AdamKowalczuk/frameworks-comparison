@@ -20,7 +20,8 @@ const user = userString ? JSON.parse(userString) : null;
       case REGISTER_SUCCESS:
         return {
           ...state,
-          isLoggedIn: false,
+          isLoggedIn: true,
+          user: payload.user,
         };
       case REGISTER_FAIL:
         return {

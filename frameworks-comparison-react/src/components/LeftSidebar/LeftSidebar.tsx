@@ -1,15 +1,22 @@
 import React from "react";
 import "./LeftSidebar.scss";
-import Button from "../Button/Button";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { sidebarLinks } from "../../constants/index";
 import { INavLink } from "../../types";
+import Logout from "../../assets/icons/logout.svg";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/actions/auth";
 
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 
 const LeftSidebar = () => {
-  const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const dispatch: any = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <nav className="left-sidebar">
@@ -45,7 +52,14 @@ const LeftSidebar = () => {
         </ul>
       </div>
 
-      <Button text="Logout"></Button>
+      <ul>
+        <li className="left-sidebar-link" onClick={handleLogout}>
+          <div className="logout-button">
+            <img src={Logout} alt="logout" />
+            Logout
+          </div>
+        </li>
+      </ul>
     </nav>
   );
 };

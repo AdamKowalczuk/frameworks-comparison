@@ -5,15 +5,25 @@
   flex-direction: column;
   .input-text {
     border: 1px solid $gray-200;
-    color: $gray-400;
+    color: $black;
     padding: 0 16px;
     outline: none;
   }
-  .input-text:focus,
+
+  .input-text::placeholder {
+    color: $gray-400;
+  }
+
   .input-text:hover,
   .input-text:active {
     border-color: $primary-500;
     border-width: 1px;
+  }
+
+  .input-text:focus {
+    border-color: $primary-500;
+    border-width: 2px;
+    padding: 0 15px;
   }
 
   .input-text--small {

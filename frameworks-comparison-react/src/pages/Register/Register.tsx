@@ -5,15 +5,19 @@ import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/actions/auth";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Register = () => {
+  let navigate = useNavigate();
+
   const [name, setName] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [successful, setSuccessful] = useState(false);
 
   const { message } = useSelector((state: any) => state.message);
-  const dispatch = useDispatch();
+  const dispatch: any = useDispatch();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -34,19 +38,16 @@ const Register = () => {
   const handleSignUp = (e: any) => {
     e.preventDefault();
 
-    // setSuccessful(false);
+    setSuccessful(false);
 
-    // form.current.validateAll();
-
-    // if (checkBtn.current.context._errors.length === 0) {
-    //   dispatch(register(username, email, password))
-    //     .then(() => {
-    //       setSuccessful(true);
-    //     })
-    //     .catch(() => {
-    //       setSuccessful(false);
-    //     });
-    // }
+    dispatch(register(name, username, email, password))
+      .then(() => {
+        setSuccessful(true);
+        navigate("/");
+      })
+      .catch(() => {
+        setSuccessful(false);
+      });
   };
 
   return (
@@ -59,23 +60,25 @@ const Register = () => {
         </div>
         <form onSubmit={handleSignUp} className="signup-form">
           <div className="form-group">
-            <InputText label="Name" placeholder="name" onChange={handleNameChange} value={name} />
+            <InputText label="Name" placeholder="Name" onChange={handleNameChange} value={name} />
           </div>
           <div className="form-group">
-            <InputText label="Username" placeholder="username" onChange={handleUsernameChange} value={username} />
+            <InputText label="Username" placeholder="Username" onChange={handleUsernameChange} value={username} />
           </div>
           <div className="form-group">
-            <InputText label="Email" placeholder="email" onChange={handleEmailChange} value={email} />
+            <InputText label="Email" placeholder="Email" onChange={handleEmailChange} value={email} />
           </div>
           <div className="form-group">
-            <InputText label="Password" placeholder="password" onChange={handlePasswordChange} value={password} />
+            <InputText label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
           </div>
 
           <Button text="Sign Up" onClick={handleSignUp} />
         </form>
         <div className="login-link">
           <span>Already have an account? </span>
-          <TextButton text="Log in" />
+          <Link to="/sign-in">
+            <TextButton text="Log in" />
+          </Link>
         </div>
       </div>
 

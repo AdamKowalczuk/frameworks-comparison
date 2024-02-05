@@ -1,23 +1,36 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/auth/";
-
-const register = (username:any, email:any, password:any) => {
-  return axios.post(API_URL + "signup", {
-    username,
-    email,
-    password,
-  });
-};
-
-const login = (username:any, password:any) => {
+const register = (name: string, username: string, email: string, password: string) => {
   return axios
-    .post(API_URL + "signin", {
+    .post(`${process.env.REACT_APP_API_URL}/api/signup`, {
+      name,
       username,
+      email,
       password,
     })
     .then((response) => {
-      if (response.data.accessToken) {
+      if (response.data.token) {
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            userId: response.data.userId,
+            token: response.data.token,
+          })
+        );
+      }
+
+      return response.data;
+    });
+};
+
+const login = (email: string, password: string) => {
+  return axios
+    .post(`${process.env.REACT_APP_API_URL}/api/signin`, {
+      email,
+      password,
+    })
+    .then((response) => {
+      if (response.data.token) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
 

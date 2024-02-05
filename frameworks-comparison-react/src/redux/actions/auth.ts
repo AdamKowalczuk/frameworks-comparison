@@ -6,14 +6,18 @@ import {
   LOGOUT,
   SET_MESSAGE,
 } from "./types";
+import { Dispatch } from 'redux';
 
 import AuthService from "../../services/authService";
 
-export const register = (username:any, email:any, password:any) => (dispatch:any) => {
-  return AuthService.register(username, email, password).then(
+export const register = (name:string,username:string, email:string, password:string) => (dispatch:Dispatch) => {
+  return AuthService.register(name,username, email, password).then(
     (response:any) => {
+
       dispatch({
         type: REGISTER_SUCCESS,
+        payload: { user: {token:response.token,
+        userId:response.userId} },
       });
 
       dispatch({
@@ -45,8 +49,8 @@ export const register = (username:any, email:any, password:any) => (dispatch:any
   );
 };
 
-export const login = (username:any, password:any) => (dispatch:any) => {
-  return AuthService.login(username, password).then(
+export const login = (email:any, password:any) => (dispatch:Dispatch) => {
+  return AuthService.login(email, password).then(
     (data:any) => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -77,7 +81,8 @@ export const login = (username:any, password:any) => (dispatch:any) => {
   );
 };
 
-export const logout = () => (dispatch:any) => {
+
+export const logout = () => (dispatch:Dispatch) => {
   AuthService.logout();
 
   dispatch({

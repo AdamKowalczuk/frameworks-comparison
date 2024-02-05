@@ -37,14 +37,19 @@
     line-height: 140%;
     color: $white;
 
-    a {
+    a,
+    .logout-button {
       display: flex;
       padding: 1rem;
       gap: 1rem;
       align-items: center;
+      cursor: pointer;
     }
   }
   .left-sidebar-link--active {
+    background-color: $primary-700;
+  }
+  .left-sidebar-link:hover {
     background-color: $primary-700;
   }
 }

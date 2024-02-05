@@ -13,7 +13,7 @@ const InputText = ({ label, placeholder, size = "medium", onChange }: InputTextP
   return (
     <div className="input-container">
       {label && <label className={["input-label", `input-label--${size}`].join(" ")}>{label}</label>}
-      <input placeholder={placeholder} className={["input-text", `input-text--${size}`].join(" ")} />
+      <input placeholder={placeholder} onChange={onChange} className={["input-text", `input-text--${size}`].join(" ")} />
     </div>
   );
 };

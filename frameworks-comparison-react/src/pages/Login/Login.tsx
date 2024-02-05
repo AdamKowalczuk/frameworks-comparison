@@ -4,7 +4,7 @@ import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../redux/actions/auth";
 
 const Login = () => {
@@ -12,12 +12,12 @@ const Login = () => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const { isLoggedIn } = useSelector((state: any) => state.auth);
   const { message } = useSelector((state: any) => state.message);
 
-  const dispatch = useDispatch();
-
+  const dispatch: any = useDispatch();
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -29,27 +29,16 @@ const Login = () => {
   const handleLogin = (e: any) => {
     e.preventDefault();
 
-    // setLoading(true);
+    setLoading(true);
 
-    // form.current.validateAll();
-
-    // if (checkBtn.current.context._errors.length === 0) {
-    //   dispatch(login(username, password))
-    //     .then(() => {
-    //       navigate("/profile");
-    //       window.location.reload();
-    //     })
-    //     .catch(() => {
-    //       setLoading(false);
-    //     });
-    // } else {
-    //   setLoading(false);
-    // }
+    dispatch(login(email, password))
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        setLoading(false);
+      });
   };
-
-  if (isLoggedIn) {
-    return <Navigate to="/profile" />;
-  }
 
   return (
     <>
@@ -62,15 +51,18 @@ const Login = () => {
           <p className="normal-md gray-500">Welcome back! Please enter your details</p>
           <form onSubmit={handleLogin} className="login-form">
             <div className="form-group">
-              <InputText label="Email" placeholder="email" onChange={handleEmailChange} value={email} />
+              <InputText label="Email" placeholder="Email" onChange={handleEmailChange} value={email} />
             </div>
             <div className="form-group">
-              <InputText label="Password" placeholder="password" onChange={handlePasswordChange} value={password} />
+              <InputText label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
             </div>
             <Button text="Log in" onClick={handleLogin} />
           </form>
           <div className="signup-link">
-            <span>Don’t have an account?</span> <TextButton text="Sign Up" />
+            <span>Don’t have an account? </span>
+            <Link to="/sign-up">
+              <TextButton text="Sign Up" />
+            </Link>
           </div>
         </div>
         <div className="right-side">{/* <img src="path/to/image.jpg" alt="Background" /> */}</div>
