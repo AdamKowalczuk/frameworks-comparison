@@ -7,11 +7,11 @@ import {
   SET_MESSAGE,
 } from "./types";
 
-import AuthService from "../services/authService";
+import AuthService from "../../services/authService";
 
-export const register = (username, email, password) => (dispatch) => {
+export const register = (username:any, email:any, password:any) => (dispatch:any) => {
   return AuthService.register(username, email, password).then(
-    (response) => {
+    (response:any) => {
       dispatch({
         type: REGISTER_SUCCESS,
       });
@@ -23,7 +23,7 @@ export const register = (username, email, password) => (dispatch) => {
 
       return Promise.resolve();
     },
-    (error) => {
+    (error:any) => {
       const message =
         (error.response &&
           error.response.data &&
@@ -45,9 +45,9 @@ export const register = (username, email, password) => (dispatch) => {
   );
 };
 
-export const login = (username, password) => (dispatch) => {
+export const login = (username:any, password:any) => (dispatch:any) => {
   return AuthService.login(username, password).then(
-    (data) => {
+    (data:any) => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { user: data },
@@ -55,7 +55,7 @@ export const login = (username, password) => (dispatch) => {
 
       return Promise.resolve();
     },
-    (error) => {
+    (error:any) => {
       const message =
         (error.response &&
           error.response.data &&
@@ -77,7 +77,7 @@ export const login = (username, password) => (dispatch) => {
   );
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => (dispatch:any) => {
   AuthService.logout();
 
   dispatch({

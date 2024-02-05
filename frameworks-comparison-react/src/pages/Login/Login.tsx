@@ -5,7 +5,7 @@ import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { login } from "../actions/auth";
+import { login } from "../../redux/actions/auth";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -13,8 +13,8 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
-  const { message } = useSelector((state) => state.message);
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
+  const { message } = useSelector((state: any) => state.message);
 
   const dispatch = useDispatch();
 
@@ -26,25 +26,25 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: any) => {
     e.preventDefault();
 
-    setLoading(true);
+    // setLoading(true);
 
-    form.current.validateAll();
+    // form.current.validateAll();
 
-    if (checkBtn.current.context._errors.length === 0) {
-      dispatch(login(username, password))
-        .then(() => {
-          navigate("/profile");
-          window.location.reload();
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
+    // if (checkBtn.current.context._errors.length === 0) {
+    //   dispatch(login(username, password))
+    //     .then(() => {
+    //       navigate("/profile");
+    //       window.location.reload();
+    //     })
+    //     .catch(() => {
+    //       setLoading(false);
+    //     });
+    // } else {
+    //   setLoading(false);
+    // }
   };
 
   if (isLoggedIn) {

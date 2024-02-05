@@ -4,7 +4,7 @@ import "./Button.scss";
 type ButtonProps = {
   variant?: "primary" | "outlined";
   text: string;
-  onClick?: () => void;
+  onClick?: any;
   size?: "small" | "medium" | "large";
   iconLeft?: JSX.Element;
   iconRight?: JSX.Element;

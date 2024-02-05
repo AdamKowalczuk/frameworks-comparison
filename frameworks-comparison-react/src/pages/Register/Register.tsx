@@ -4,7 +4,7 @@ import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../actions/auth";
+import { register } from "../../redux/actions/auth";
 
 const Register = () => {
   const [name, setName] = useState<string>("");
@@ -12,7 +12,7 @@ const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { message } = useSelector((state) => state.message);
+  const { message } = useSelector((state: any) => state.message);
   const dispatch = useDispatch();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,22 +31,22 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
-  const handleRegister = (e) => {
+  const handleSignUp = (e: any) => {
     e.preventDefault();
 
-    setSuccessful(false);
+    // setSuccessful(false);
 
-    form.current.validateAll();
+    // form.current.validateAll();
 
-    if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password))
-        .then(() => {
-          setSuccessful(true);
-        })
-        .catch(() => {
-          setSuccessful(false);
-        });
-    }
+    // if (checkBtn.current.context._errors.length === 0) {
+    //   dispatch(register(username, email, password))
+    //     .then(() => {
+    //       setSuccessful(true);
+    //     })
+    //     .catch(() => {
+    //       setSuccessful(false);
+    //     });
+    // }
   };
 
   return (
@@ -57,7 +57,7 @@ const Register = () => {
           <h4>Create a new account</h4>
           <p className="normal-md gray-500">Please enter your details</p>
         </div>
-        <form onSubmit={handleRegister} className="signup-form">
+        <form onSubmit={handleSignUp} className="signup-form">
           <div className="form-group">
             <InputText label="Name" placeholder="name" onChange={handleNameChange} value={name} />
           </div>
