@@ -11,7 +11,7 @@ import { Dispatch } from 'redux';
 import AuthService from "../../services/authService";
 
 export const register = (name:string,username:string, email:string, password:string) => (dispatch:Dispatch) => {
-  return AuthService.register(name,username, email, password).then(
+  return AuthService.register({name,username, email, password}).then(
     (response:any) => {
 
       dispatch({

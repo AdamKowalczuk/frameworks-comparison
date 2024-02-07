@@ -1,6 +1,7 @@
 import axios from "axios";
+import { INewUser } from "../types";
 
-const register = (name: string, username: string, email: string, password: string) => {
+const register = ({name, username, email, password}:INewUser) => {
   return axios
     .post(`${process.env.REACT_APP_API_URL}/api/signup`, {
       name,
@@ -20,7 +21,9 @@ const register = (name: string, username: string, email: string, password: strin
       }
 
       return response.data;
-    });
+    }).catch((error) => {
+      throw error;
+    });;
 };
 
 const login = (email: string, password: string) => {
@@ -35,7 +38,10 @@ const login = (email: string, password: string) => {
       }
 
       return response.data;
-    });
+    }).catch((error) => {
+      throw error;
+    });;
+
 };
 
 const logout = () => {

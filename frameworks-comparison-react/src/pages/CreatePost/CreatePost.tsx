@@ -3,7 +3,7 @@ import "./CreatePost.scss";
 import Textarea from "../../components/Textarea/Textarea";
 import InputText from "../../components/InputText/InputText";
 import Button from "../../components/Button/Button";
-import CreatePostIcon from "../../assets/icons/gallery-add-black.svg";
+import { ReactComponent as CreatePostIcon } from "../../assets/icons/gallery-add-black.svg";
 
 const CreatePost = () => {
   const [caption, setCaption] = useState("");
@@ -17,7 +17,7 @@ const CreatePost = () => {
   return (
     <div className="right-container">
       <div className="title-wrapper">
-        <img src={CreatePostIcon} alt="home" />
+        <CreatePostIcon />
         <h4>Create Post</h4>
       </div>
       <div className="create-post">

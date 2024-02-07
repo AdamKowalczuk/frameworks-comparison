@@ -18,7 +18,7 @@ export const sidebarLinks = [
   {
     imgURL: People,
     route: "/all-users",
-    label: "People",
+    label: "Users",
   },
   {
     imgURL: Saved,

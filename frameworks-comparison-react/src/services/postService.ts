@@ -1,14 +1,14 @@
 import axios from "axios";
-import { IUser } from "../types";
+import { INewPost, IUpdatePost } from "../types";
 import { getToken } from "../utils/authUtils";
 
-const getUsers = () => {
+const getPosts = () => {
   const token = getToken();
   if (!token) {
     return Promise.reject("Token not found in localStorage");
   }
   return axios
-    .get(`${process.env.REACT_APP_API_URL}/api/users`, {
+    .get(`${process.env.REACT_APP_API_URL}/api/posts`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -21,20 +21,18 @@ const getUsers = () => {
     });
 };
 
-const getUserById = (userId: string): Promise<IUser[]> => {
+const createPost = (postData: INewPost) => {
   const token = getToken();
   if (!token) {
     return Promise.reject("Token not found in localStorage");
   }
   return axios
-    .post(`${process.env.REACT_APP_API_URL}/api/user/${userId}`, {
+    .post(`${process.env.REACT_APP_API_URL}/api/posts`, postData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
     .then((response) => {
-
-
       return response.data;
     })
     .catch((error) => {
@@ -42,13 +40,32 @@ const getUserById = (userId: string): Promise<IUser[]> => {
     });
 };
 
-const editUserById = (userId: string, userData: IUser): Promise<IUser[]> => {
+const editPostById = (postId: string, postData: IUpdatePost) => {
   const token = getToken();
   if (!token) {
     return Promise.reject("Token not found in localStorage");
   }
   return axios
-    .put(`/api/users/${userId}`, userData, {
+    .put(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, postData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+const getPostById = (postId: string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .get(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -62,7 +79,8 @@ const editUserById = (userId: string, userData: IUser): Promise<IUser[]> => {
 };
 
 export default {
-  getUsers,
-  getUserById,
-  editUserById,
+  getPosts,
+  createPost,
+  editPostById,
+  getPostById,
 };
