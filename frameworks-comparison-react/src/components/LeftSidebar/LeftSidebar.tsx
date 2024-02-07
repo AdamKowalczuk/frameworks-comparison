@@ -1,6 +1,6 @@
 import React from "react";
 import "./LeftSidebar.scss";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { sidebarLinks } from "../../constants/index";
 import { INavLink } from "../../types";
 import Logout from "../../assets/icons/logout.svg";
@@ -10,12 +10,14 @@ import { logout } from "../../redux/actions/auth";
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 
 const LeftSidebar = () => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
   const dispatch: any = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/sign-in");
   };
 
   return (
