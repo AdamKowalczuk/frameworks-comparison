@@ -5,7 +5,8 @@ import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/actions/auth";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 const Register = () => {
   let navigate = useNavigate();
@@ -14,7 +15,7 @@ const Register = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [successful, setSuccessful] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { message } = useSelector((state: any) => state.message);
   const dispatch: any = useDispatch();
@@ -38,15 +39,15 @@ const Register = () => {
   const handleSignUp = (e: any) => {
     e.preventDefault();
 
-    setSuccessful(false);
+    setLoading(true);
 
     dispatch(register(name, username, email, password))
       .then(() => {
-        setSuccessful(true);
+        setLoading(true);
         navigate("/");
       })
       .catch(() => {
-        setSuccessful(false);
+        setLoading(false);
       });
   };
 
@@ -69,10 +70,19 @@ const Register = () => {
             <InputText label="Email" placeholder="Email" onChange={handleEmailChange} value={email} />
           </div>
           <div className="form-group">
-            <InputText label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
+            <InputText type="password" label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
           </div>
 
-          <Button text="Sign Up" onClick={handleSignUp} />
+          <Button onClick={handleSignUp}>
+            {loading ? (
+              <div className="loader-wrapper">
+                <Loader />
+                Loading...
+              </div>
+            ) : (
+              "Sign Up"
+            )}
+          </Button>
         </form>
         <div className="login-link">
           <span>Already have an account? </span>
@@ -81,8 +91,6 @@ const Register = () => {
           </Link>
         </div>
       </div>
-
-      <div className="right-side">{/* <img src="path/to/image.jpg" alt="Background" /> */}</div>
     </div>
   );
 };

@@ -3,16 +3,18 @@ import "./Button.scss";
 
 type ButtonProps = {
   variant?: "primary" | "outlined";
-  text: string;
+  text?: string;
   onClick?: any;
   size?: "small" | "medium" | "large";
   iconLeft?: JSX.Element;
   iconRight?: JSX.Element;
+  children?: any;
 };
 
-const Button = ({ text, variant = "primary", onClick, size = "medium", iconLeft, iconRight }: ButtonProps) => {
+const Button = ({ text, variant = "primary", onClick, size = "medium", iconLeft, iconRight, children }: ButtonProps) => {
   return (
     <button className={["custom-button", `custom-button--${variant}`, `custom-button--${size}`].join(" ")} onClick={onClick}>
+      {children}
       {iconLeft}
       {text}
       {iconRight}

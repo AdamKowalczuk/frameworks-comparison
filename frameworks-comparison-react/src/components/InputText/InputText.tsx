@@ -7,13 +7,14 @@ interface InputTextProps {
   size?: "small" | "medium" | "large";
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  type?: string;
 }
 
-const InputText = ({ label, placeholder, size = "medium", onChange }: InputTextProps) => {
+const InputText = ({ label, placeholder, size = "medium", onChange, type = "text" }: InputTextProps) => {
   return (
     <div className="input-container">
       {label && <label className={["input-label", `input-label--${size}`].join(" ")}>{label}</label>}
-      <input placeholder={placeholder} onChange={onChange} className={["input-text", `input-text--${size}`].join(" ")} />
+      <input type={type} placeholder={placeholder} onChange={onChange} className={["input-text", `input-text--${size}`].join(" ")} />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import InputText from "../../components/InputText/InputText";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../redux/actions/auth";
+import Loader from "../../components/Loader/Loader";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -34,6 +35,7 @@ const Login = () => {
     dispatch(login(email, password))
       .then(() => {
         navigate("/");
+        setLoading(false);
       })
       .catch(() => {
         setLoading(false);
@@ -54,9 +56,19 @@ const Login = () => {
               <InputText label="Email" placeholder="Email" onChange={handleEmailChange} value={email} />
             </div>
             <div className="form-group">
-              <InputText label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
+              <InputText type="password" label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
             </div>
-            <Button text="Log in" onClick={handleLogin} />
+
+            <Button onClick={handleLogin}>
+              {loading ? (
+                <div className="loader-wrapper">
+                  <Loader />
+                  Loading...
+                </div>
+              ) : (
+                "Log in"
+              )}
+            </Button>
           </form>
           <div className="signup-link">
             <span>Don’t have an account? </span>
@@ -65,7 +77,6 @@ const Login = () => {
             </Link>
           </div>
         </div>
-        <div className="right-side">{/* <img src="path/to/image.jpg" alt="Background" /> */}</div>
       </div>
     </>
   );
