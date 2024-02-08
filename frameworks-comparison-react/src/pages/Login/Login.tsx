@@ -59,7 +59,7 @@ const Login = () => {
               <InputText type="password" label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
             </div>
 
-            <Button onClick={handleLogin}>
+            <Button onClick={handleLogin} type="submit">
               {loading ? (
                 <div className="loader-wrapper">
                   <Loader />

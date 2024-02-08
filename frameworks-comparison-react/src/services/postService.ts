@@ -30,6 +30,7 @@ const createPost = (postData: INewPost) => {
     .post(`${process.env.REACT_APP_API_URL}/api/posts`, postData, {
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
       },
     })
     .then((response) => {

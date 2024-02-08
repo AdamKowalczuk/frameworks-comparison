@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import "./Textarea.scss";
 
 type TextareaProps = {
   label?: string;

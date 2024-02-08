@@ -1,8 +1,11 @@
 @import "src/assets/scss/variables.scss";
 
 .textarea-container {
+  display: flex;
+  flex-direction: column;
   .textarea-label {
     color: $black;
+    margin-bottom: 8px;
   }
 
   .textarea-label--small {
@@ -19,8 +22,8 @@
 
   .textarea-text {
     border: 1px solid $gray-200;
-    color: $gray-400;
-    padding: 0 16px;
+    color: $black;
+    padding: 8px 16px;
     outline: none;
   }
   .textarea-text:focus,
@@ -30,18 +33,24 @@
     border-width: 1px;
   }
 
+  .textarea-text:focus {
+    border-color: $primary-500;
+    border-width: 2px;
+    padding: 7px 15px;
+  }
+
   .textarea-text--small {
     min-height: 32px;
     border-radius: 4px;
   }
 
   .textarea-text--medium {
-    min-height: 40px;
+    min-height: 80px;
     border-radius: 4px;
   }
 
   .textarea-text--large {
-    min-height: 48px;
+    min-height: 80px;
     border-radius: 6px;
   }
 }

@@ -73,7 +73,7 @@ const Register = () => {
             <InputText type="password" label="Password" placeholder="Password" onChange={handlePasswordChange} value={password} />
           </div>
 
-          <Button onClick={handleSignUp}>
+          <Button onClick={handleSignUp} type="submit">
             {loading ? (
               <div className="loader-wrapper">
                 <Loader />

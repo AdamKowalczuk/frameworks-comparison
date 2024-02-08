@@ -24,9 +24,11 @@ export type INewPost = {
 export type IPost = {
   userId: string;
   caption: string;
-  file: File[];
+  imageUrl: string;
+  likes:any
   location?: string;
   tags?: string;
+  createdAt:string
 };
 
 export type IUpdatePost = {

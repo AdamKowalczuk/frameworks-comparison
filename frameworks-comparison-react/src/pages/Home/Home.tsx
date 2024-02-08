@@ -23,6 +23,16 @@ const Home = () => {
         <HomeIcon />
         <h4>Home Page</h4>
       </div>
+      <div>
+        {posts.map((post) => {
+          return (
+            <>
+              <p>{post.caption}</p>
+              <img src={post.imageUrl} alt={post.caption} />
+            </>
+          );
+        })}
+      </div>
     </div>
   );
 };
