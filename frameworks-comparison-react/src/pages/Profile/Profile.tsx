@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.scss";
 import Button from "../../components/Button/Button";
-import { IUser } from "../../types";
-import { useDispatch, useSelector } from "react-redux";
+import { IPost, IUser } from "../../types";
+import { useSelector } from "react-redux";
 import UserService from "../../services/userService";
+import LikeImg from "../../assets/icons/like.svg";
+import PostImg from "../../assets/icons/posts.svg";
+
+import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
+
+interface PostsListProps {
+  posts: IPost[] | undefined;
+  option: "posts" | "liked-posts";
+}
 
 const Profile = () => {
-  const [selectedTab, setSelectedTab] = useState("posts");
+  const [selectedTab, setSelectedTab] = useState<"posts" | "liked-posts">("posts");
   const { user } = useSelector((state: any) => state.auth);
   const [activeUser, setActiveUser] = useState<IUser>();
+  const [userPosts, setUserPosts] = useState<IPost[] | undefined>();
+  const [userLikedPosts, setUserLikedPosts] = useState<IPost[] | undefined>();
+
   console.log("🚀 ~ Profile ~ activeUser:", activeUser);
 
   useEffect(() => {
@@ -21,31 +33,49 @@ const Profile = () => {
       });
   }, []);
 
-  const handleTabChange = (tab: string) => {
+  const handleTabChange = (tab: "posts" | "liked-posts") => {
     setSelectedTab(tab);
   };
   return (
-    <div className="user-profile">
-      <div className="profile-header">
-        <div className="profile-info">
-          <h2>Nazwa Użytkownika</h2>
-          <p>Email Użytkownika</p>
-          <p>Tu znajduje się opis użytkownika.</p>
+    <div className="right-container">
+      <div className="user-profile">
+        <div className="profile-header">
+          <img src={ProfilePlaceholder} alt="profile" className="profile-img" />
+          <div className="profile-info">
+            <p>{activeUser?.name}</p>
+            <p>{`@${activeUser?.username}`}</p>
+            <p>{activeUser?.bio}</p>
+          </div>
+          <Button text="Edit Profile" />
         </div>
-        <Button text="Edit Profile" />
-      </div>
 
-      <div className="profile-tabs">
-        <button onClick={() => handleTabChange("posts")} className={selectedTab === "posts" ? "active" : ""}>
-          Posts
-        </button>
-        <button onClick={() => handleTabChange("liked-posts")} className={selectedTab === "liked-posts" ? "active" : ""}>
-          Liked Posts
-        </button>
+        <div className="posts-tabs">
+          <div onClick={() => handleTabChange("posts")} className={selectedTab === "posts" ? "tab active" : "tab"}>
+            <img src={LikeImg} alt="like" />
+            <p>Posts</p>
+          </div>
+          <div onClick={() => handleTabChange("liked-posts")} className={selectedTab === "liked-posts" ? "tab active" : "tab"}>
+            <img src={PostImg} alt="post" />
+            <p> Liked Posts</p>
+          </div>
+        </div>
+        <PostsList posts={selectedTab === "posts" ? userPosts : userLikedPosts} option={selectedTab} />
       </div>
-
-      <div className="posts-list"></div>
     </div>
+  );
+};
+
+const PostsList = ({ posts, option }: PostsListProps) => {
+  return (
+    <>
+      {posts && posts.length > 0 ? (
+        posts.map((post) => {
+          return <>{post.caption}</>;
+        })
+      ) : (
+        <p style={{ display: "flex", justifyContent: "center" }}>No {option === "liked-posts" ? "liked " : ""}posts</p>
+      )}
+    </>
   );
 };
 
