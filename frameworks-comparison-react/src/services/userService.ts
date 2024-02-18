@@ -21,13 +21,13 @@ const getUsers = () => {
     });
 };
 
-const getUserById = (userId: string): Promise<IUser[]> => {
+const getUserById = (userId: string) => {
   const token = getToken();
   if (!token) {
     return Promise.reject("Token not found in localStorage");
   }
   return axios
-    .post(`${process.env.REACT_APP_API_URL}/api/user/${userId}`, {
+    .get(`${process.env.REACT_APP_API_URL}/api/users/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

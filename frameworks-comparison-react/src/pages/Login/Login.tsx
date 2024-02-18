@@ -44,14 +44,15 @@ const Login = () => {
 
   return (
     <>
-      <div className="login-page">
+      <div className="auth-page">
         <div className="left-side">
           <h2 className="logo">PostShare</h2>
-          <div className="login-header"></div>
-          <h4>Log in to your account</h4>
+          <div className="auth-header">
+            <h4>Log in to your account</h4>
 
-          <p className="normal-md gray-500">Welcome back! Please enter your details</p>
-          <form onSubmit={handleLogin} className="login-form">
+            <p className="normal-md gray-500">Welcome back! Please enter your details</p>
+          </div>
+          <form onSubmit={handleLogin} className="auth-form">
             <div className="form-group">
               <InputText label="Email" placeholder="Email" onChange={handleEmailChange} value={email} />
             </div>

@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Profile.scss";
 import Button from "../../components/Button/Button";
+import { IUser } from "../../types";
+import { useDispatch, useSelector } from "react-redux";
+import UserService from "../../services/userService";
 
 const Profile = () => {
   const [selectedTab, setSelectedTab] = useState("posts");
+  const { user } = useSelector((state: any) => state.auth);
+  const [activeUser, setActiveUser] = useState<IUser>();
+  console.log("🚀 ~ Profile ~ activeUser:", activeUser);
+
+  useEffect(() => {
+    UserService.getUserById(user.userId)
+      .then((response) => {
+        setActiveUser(response.user);
+      })
+      .catch((error: any) => {
+        console.error("Error fetching users:", error);
+      });
+  }, []);
 
   const handleTabChange = (tab: string) => {
     setSelectedTab(tab);

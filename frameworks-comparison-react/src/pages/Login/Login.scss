@@ -1,6 +1,6 @@
 @import "src/assets/scss/variables.scss";
 
-.login-page {
+.auth-page {
   .left-side {
     width: 450px;
     display: flex;
@@ -13,7 +13,13 @@
       font-size: 40px;
     }
 
-    .login-form {
+    .auth-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .auth-form {
       width: 100%;
       display: flex;
       flex-direction: column;

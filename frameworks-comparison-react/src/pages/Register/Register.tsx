@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
-import "./Register.scss";
+import "../Login/Login.scss";
 import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
 import InputText from "../../components/InputText/InputText";
@@ -52,14 +52,14 @@ const Register = () => {
   };
 
   return (
-    <div className="signup-page">
+    <div className="auth-page">
       <div className="left-side">
         <h2 className="logo">PostShare</h2>
-        <div className="signup-header">
+        <div className="auth-header">
           <h4>Create a new account</h4>
           <p className="normal-md gray-500">Please enter your details</p>
         </div>
-        <form onSubmit={handleSignUp} className="signup-form">
+        <form onSubmit={handleSignUp} className="auth-form">
           <div className="form-group">
             <InputText label="Name" placeholder="Name" onChange={handleNameChange} value={name} />
           </div>

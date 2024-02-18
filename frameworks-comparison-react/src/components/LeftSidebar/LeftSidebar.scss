@@ -13,6 +13,24 @@
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 
+  .sidebar-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.75rem;
+    .sidebar-profile {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      .user-info {
+        display: flex;
+        flex-direction: column;
+        .text-secondary {
+          color: $primary-700;
+        }
+      }
+    }
+  }
+
   h4 {
     color: $white;
   }

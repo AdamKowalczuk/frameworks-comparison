@@ -4,7 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { sidebarLinks } from "../../constants/index";
 import { INavLink } from "../../types";
 import Logout from "../../assets/icons/logout.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/actions/auth";
 
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
@@ -12,6 +12,7 @@ import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 const LeftSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { user } = useSelector((state: any) => state.auth);
 
   const dispatch: any = useDispatch();
 
@@ -22,16 +23,18 @@ const LeftSidebar = () => {
 
   return (
     <nav className="left-sidebar">
-      <div>
+      <div className="sidebar-wrapper">
         <Link to="/">
           <h4>PostShare</h4>
         </Link>
 
-        <Link to={`/profile/111`}>
-          <img src={ProfilePlaceholder} alt="profile" className="h-14 w-14 rounded-full" />
-          <div className="flex flex-col">
-            <p className="body-bold">Kowal</p>
-            <p className="small-regular text-light-3">@AdamKowal</p>
+        <Link to={`/profile/${user.userId}`}>
+          <div className="sidebar-profile">
+            <img src={ProfilePlaceholder} alt="profile" />
+            <div className="user-info">
+              <p>Kowal</p>
+              <p className="text-secondary">@AdamKowal</p>
+            </div>
           </div>
         </Link>
 
