@@ -1,23 +1,16 @@
-import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  SET_MESSAGE,
-} from "./types";
-import { Dispatch } from 'redux';
+import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, SET_MESSAGE } from "./types";
+import { Dispatch } from "redux";
 
 import AuthService from "../../services/authService";
 
-export const register = (name:string,username:string, email:string, password:string) => (dispatch:Dispatch) => {
-  return AuthService.register({name,username, email, password}).then(
-    (response:any) => {
-
+export const register = (name: string, username: string, email: string, password: string) => (dispatch: Dispatch) => {
+  return AuthService.register({ name, username, email, password }).then(
+    (response: any) => {
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: { user: {token:response.token,
-        userId:response.userId} },
+        payload: {
+          user: { token: response.token, userId: response.userId, imageUrl: response.imageUrl, username: response.username, name: response.name },
+        },
       });
 
       dispatch({
@@ -27,13 +20,8 @@ export const register = (name:string,username:string, email:string, password:str
 
       return Promise.resolve();
     },
-    (error:any) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+    (error: any) => {
+      const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
 
       dispatch({
         type: REGISTER_FAIL,
@@ -49,9 +37,9 @@ export const register = (name:string,username:string, email:string, password:str
   );
 };
 
-export const login = (email:any, password:any) => (dispatch:Dispatch) => {
+export const login = (email: any, password: any) => (dispatch: Dispatch) => {
   return AuthService.login(email, password).then(
-    (data:any) => {
+    (data: any) => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { user: data },
@@ -59,13 +47,8 @@ export const login = (email:any, password:any) => (dispatch:Dispatch) => {
 
       return Promise.resolve();
     },
-    (error:any) => {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
+    (error: any) => {
+      const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
 
       dispatch({
         type: LOGIN_FAIL,
@@ -81,8 +64,7 @@ export const login = (email:any, password:any) => (dispatch:Dispatch) => {
   );
 };
 
-
-export const logout = () => (dispatch:Dispatch) => {
+export const logout = () => (dispatch: Dispatch) => {
   AuthService.logout();
 
   dispatch({

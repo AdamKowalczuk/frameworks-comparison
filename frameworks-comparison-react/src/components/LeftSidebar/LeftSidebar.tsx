@@ -30,10 +30,10 @@ const LeftSidebar = () => {
 
         <Link to={`/profile/${user.userId}`}>
           <div className="sidebar-profile">
-            <img src={ProfilePlaceholder} alt="profile" />
+            <img src={user.imageUrl ? user.imageUrl : ProfilePlaceholder} alt="profile" />
             <div className="user-info">
-              <p>Kowal</p>
-              <p className="text-secondary">@AdamKowal</p>
+              <p className="username">{user.username}</p>
+              <p className="text-secondary">@{user.name}</p>
             </div>
           </div>
         </Link>

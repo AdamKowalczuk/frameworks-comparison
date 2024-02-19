@@ -33,6 +33,9 @@
       transition-duration: 150ms;
       background-color: $primary-100;
       cursor: pointer;
+      border: 1px solid $primary-500;
+      background-color: transparent;
+      color: $primary-500;
     }
     .tab:first-child {
       border-top-left-radius: 0.5rem;
@@ -42,8 +45,36 @@
       border-top-right-radius: 0.5rem;
       border-bottom-right-radius: 0.5rem;
     }
-    .active {
-      background-color: $primary-500;
+
+    .tab:first-child {
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+
+      &.active {
+        background-color: $primary-500;
+        color: $white;
+        svg {
+          path {
+            stroke: $white;
+          }
+          circle {
+            stroke: $white;
+          }
+        }
+      }
+    }
+    .tab:last-child {
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      &.active {
+        background-color: $primary-500;
+        color: $white;
+        svg {
+          path {
+            fill: $white;
+          }
+        }
+      }
     }
   }
 }

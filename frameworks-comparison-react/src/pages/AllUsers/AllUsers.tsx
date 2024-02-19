@@ -4,14 +4,18 @@ import { ReactComponent as AllUsersIcon } from "../../assets/icons/people-black.
 import UserService from "../../services/userService";
 import { IUser } from "../../types";
 import UserCard from "../../components/UserCard/UserCard";
+import Loader from "../../components/Loader/Loader";
 
 const AllUsers = () => {
   const [users, setUsers] = useState<IUser[]>([]);
+  const [isUsersLoading, setIsUsersLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsUsersLoading(true);
     UserService.getUsers()
       .then((response) => {
         setUsers(response.users);
+        setIsUsersLoading(false);
       })
       .catch((error: any) => {
         console.error("Error fetching users:", error);
@@ -24,11 +28,15 @@ const AllUsers = () => {
         <AllUsersIcon />
         <h4>Users</h4>
       </div>
-      <div className="users-list">
-        {users.map((user) => (
-          <UserCard user={user} />
-        ))}
-      </div>
+      {isUsersLoading && !users ? (
+        <Loader />
+      ) : (
+        <div className="users-list">
+          {users.map((user) => (
+            <UserCard user={user} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -21,11 +21,22 @@
       display: flex;
       gap: 0.75rem;
       align-items: center;
+      img {
+        width: 56px;
+        height: 56px;
+        border-radius: 100%;
+      }
       .user-info {
         display: flex;
         flex-direction: column;
+        .username {
+          color: $white;
+          font-weight: bold;
+          font-size: 18px;
+        }
         .text-secondary {
-          color: $primary-700;
+          color: $gray-200;
+          font-size: 12px;
         }
       }
     }

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.scss";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { IPost, IUser } from "../../types";
 import { useSelector } from "react-redux";
 import UserService from "../../services/userService";
-import LikeImg from "../../assets/icons/like.svg";
-import PostImg from "../../assets/icons/posts.svg";
+import { ReactComponent as LikeImg } from "../../assets/icons/like.svg";
+import { ReactComponent as PostImg } from "../../assets/icons/posts.svg";
 
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 
@@ -15,13 +16,13 @@ interface PostsListProps {
 }
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState<"posts" | "liked-posts">("posts");
   const { user } = useSelector((state: any) => state.auth);
+
   const [activeUser, setActiveUser] = useState<IUser>();
   const [userPosts, setUserPosts] = useState<IPost[] | undefined>();
   const [userLikedPosts, setUserLikedPosts] = useState<IPost[] | undefined>();
-
-  console.log("🚀 ~ Profile ~ activeUser:", activeUser);
 
   useEffect(() => {
     UserService.getUserById(user.userId)
@@ -36,26 +37,32 @@ const Profile = () => {
   const handleTabChange = (tab: "posts" | "liked-posts") => {
     setSelectedTab(tab);
   };
+
+  const handleEditProfile = () => {
+    navigate(`/update-profile/${user.userId}`);
+  };
+
   return (
     <div className="right-container">
       <div className="user-profile">
         <div className="profile-header">
-          <img src={ProfilePlaceholder} alt="profile" className="profile-img" />
+          <img src={activeUser?.imageUrl ? activeUser?.imageUrl : ProfilePlaceholder} alt="profile" className="profile-img" />
           <div className="profile-info">
             <p>{activeUser?.name}</p>
             <p>{`@${activeUser?.username}`}</p>
             <p>{activeUser?.bio}</p>
           </div>
-          <Button text="Edit Profile" />
+
+          <Button text="Edit Profile" onClick={handleEditProfile} />
         </div>
 
         <div className="posts-tabs">
           <div onClick={() => handleTabChange("posts")} className={selectedTab === "posts" ? "tab active" : "tab"}>
-            <img src={LikeImg} alt="like" />
+            <PostImg />
             <p>Posts</p>
           </div>
           <div onClick={() => handleTabChange("liked-posts")} className={selectedTab === "liked-posts" ? "tab active" : "tab"}>
-            <img src={PostImg} alt="post" />
+            <LikeImg />
             <p> Liked Posts</p>
           </div>
         </div>

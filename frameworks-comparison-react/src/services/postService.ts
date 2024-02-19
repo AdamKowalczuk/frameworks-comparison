@@ -79,9 +79,135 @@ const getPostById = (postId: string) => {
     });
 };
 
+
+const searchPosts = (query: string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .get(`${process.env.REACT_APP_API_URL}/api/posts/search?query=${query}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
+const deletePostById = (postId: string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .delete(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
+const likePostById = (postId: string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .post(`${process.env.REACT_APP_API_URL}/api/posts/${postId}/like`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
+const unlikePostById = (postId: string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .post(`${process.env.REACT_APP_API_URL}/api/posts/${postId}/unlike`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
+const savePostById = (postId: string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .post(`${process.env.REACT_APP_API_URL}/api/posts/${postId}/save`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
+const unsavePostById = (postId: string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .post(`${process.env.REACT_APP_API_URL}/api/posts/${postId}/unsave`, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
 export default {
   getPosts,
   createPost,
   editPostById,
   getPostById,
+  searchPosts,
+  deletePostById,
+  likePostById,
+  unlikePostById,
+  savePostById,
+  unsavePostById,
 };

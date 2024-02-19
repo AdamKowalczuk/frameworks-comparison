@@ -4,9 +4,7 @@
   cursor: pointer;
   outline: none;
   border: 1px solid $primary-500;
-
   display: flex;
-
   height: 40px;
   padding: 0px 16px;
   justify-content: center;
@@ -14,6 +12,7 @@
   gap: 8px;
   border-radius: 6px;
   transition: background-color 0.3s ease;
+  white-space: nowrap;
 }
 
 .custom-button--primary {

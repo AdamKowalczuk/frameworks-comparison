@@ -42,15 +42,21 @@ const getUserById = (userId: string) => {
     });
 };
 
-const editUserById = (userId: string, userData: IUser): Promise<IUser[]> => {
+interface EditUserData {
+  userId: string;
+  userData: IUser;
+}
+
+const editUser = ({userId, userData}:EditUserData): Promise<IUser[]> => {
   const token = getToken();
   if (!token) {
     return Promise.reject("Token not found in localStorage");
   }
   return axios
-    .put(`/api/users/${userId}`, userData, {
+    .put(`${process.env.REACT_APP_API_URL}/api/users/${userId}`, userData, {
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
       },
     })
     .then((response) => {
@@ -64,5 +70,5 @@ const editUserById = (userId: string, userData: IUser): Promise<IUser[]> => {
 export default {
   getUsers,
   getUserById,
-  editUserById,
+  editUser,
 };
