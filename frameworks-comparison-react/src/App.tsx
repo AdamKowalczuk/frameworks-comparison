@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
-import Explore from "./pages/Explore/Explore";
 import Saved from "./pages/Saved/Saved";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import CreatePost from "./pages/CreatePost/CreatePost";
@@ -39,7 +38,6 @@ function App() {
         </Route>
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-post" element={<CreatePost />} />
