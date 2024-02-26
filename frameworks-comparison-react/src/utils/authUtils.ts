@@ -1,5 +1,4 @@
-export const getToken = (): string | null => {
-    const userString = localStorage.getItem("user");
-    const user = userString ? JSON.parse(userString) : null;
-    return user?.token || null;
+export const getToken = (): string => {
+    const token = localStorage.getItem("token");
+    return token ? JSON.parse(token) : null;
   };

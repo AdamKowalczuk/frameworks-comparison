@@ -14,11 +14,12 @@ import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 const UpdateProfile = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state: any) => state.auth);
-  const [name, setName] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
-  const [bio, setBio] = useState<string>("");
+
+  const [name, setName] = useState<string>(user.name);
+  const [userName, setUserName] = useState<string>(user.userName);
+  const [bio, setBio] = useState<string>(user.bio);
   const [file, setFile] = useState<any>(null);
-  const [fileURL, setFileURL] = useState<string | null>(null);
+  const [fileURL, setFileURL] = useState<string | null>(user.imageUrl);
   const [loading, setLoading] = useState(false);
   const fileInputRef: any = useRef(null);
 
@@ -27,7 +28,7 @@ const UpdateProfile = () => {
   };
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    setUserName(e.target.value);
   };
 
   const handleBioChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -37,7 +38,7 @@ const UpdateProfile = () => {
   const handleUpdateUser = () => {
     const userData = {
       name,
-      username,
+      userName,
       email: user.email,
       bio,
       file,
@@ -96,7 +97,7 @@ const UpdateProfile = () => {
         </div>
 
         <InputText label="Name" placeholder="Name" onChange={handleNameChange} value={name} />
-        <InputText label="Username" placeholder="Username" onChange={handleUsernameChange} value={username} />
+        <InputText label="Username" placeholder="Username" onChange={handleUsernameChange} value={userName} />
         <Textarea label="Bio" onChange={handleBioChange} value={bio} />
         <div className="buttons-section">
           <Button variant="outlined" text="Cancel" onClick={handleCancel} />

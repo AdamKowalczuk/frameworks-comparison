@@ -18,7 +18,9 @@ interface PostsListProps {
 const Profile = () => {
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState<"posts" | "liked-posts">("posts");
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: any) => {
+    return state.auth;
+  });
 
   const [activeUser, setActiveUser] = useState<IUser>();
   const [userPosts, setUserPosts] = useState<IPost[] | undefined>();
@@ -46,11 +48,10 @@ const Profile = () => {
     <div className="right-container">
       <div className="user-profile">
         <div className="profile-header">
-          <img src={activeUser?.imageUrl ? activeUser?.imageUrl : ProfilePlaceholder} alt="profile" className="profile-img" />
+          <img src={user?.imageUrl ? user?.imageUrl : ProfilePlaceholder} alt="profile" className="profile-img" />
           <div className="profile-info">
-            <p>{activeUser?.name}</p>
-            <p>{`@${activeUser?.username}`}</p>
-            <p>{activeUser?.bio}</p>
+            <p>{user?.userName}</p>
+            <p>{user?.bio}</p>
           </div>
 
           <Button text="Edit Profile" onClick={handleEditProfile} />

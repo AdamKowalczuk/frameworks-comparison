@@ -3,19 +3,19 @@ import { Dispatch } from "redux";
 
 import AuthService from "../../services/authService";
 
-export const register = (name: string, username: string, email: string, password: string) => (dispatch: Dispatch) => {
-  return AuthService.register({ name, username, email, password }).then(
+export const register = (userName: string, email: string, password: string) => (dispatch: Dispatch) => {
+  return AuthService.register({  userName, email, password }).then(
     (response: any) => {
       dispatch({
         type: REGISTER_SUCCESS,
         payload: {
-          user: { token: response.token, userId: response.userId, imageUrl: response.imageUrl, username: response.username, name: response.name },
+          user: { imageUrl: response.imageUrl, userName: response.userName,  bio:response.bio },
         },
       });
 
       dispatch({
         type: SET_MESSAGE,
-        payload: response.data.message,
+        payload: { type: "success", text: "Registration successful" },
       });
 
       return Promise.resolve();
@@ -29,7 +29,7 @@ export const register = (name: string, username: string, email: string, password
 
       dispatch({
         type: SET_MESSAGE,
-        payload: message,
+        payload: { type: "error", text: message },
       });
 
       return Promise.reject();
@@ -40,9 +40,10 @@ export const register = (name: string, username: string, email: string, password
 export const login = (email: any, password: any) => (dispatch: Dispatch) => {
   return AuthService.login(email, password).then(
     (data: any) => {
+
       dispatch({
         type: LOGIN_SUCCESS,
-        payload: { user: data },
+        payload: { user: data.user },
       });
 
       return Promise.resolve();
@@ -56,7 +57,7 @@ export const login = (email: any, password: any) => (dispatch: Dispatch) => {
 
       dispatch({
         type: SET_MESSAGE,
-        payload: message,
+        payload: { type: "error", text: message },
       });
 
       return Promise.reject();

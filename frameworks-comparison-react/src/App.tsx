@@ -9,11 +9,13 @@ import EditPost from "./pages/EditPost/EditPost";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import Profile from "./pages/Profile/Profile";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import AuthLayout from "./pages/AuthLayout/AuthLayout";
 import RootLayout from "./pages/RootLayout/RootLayout";
 import { getToken } from "./utils/authUtils";
+import { jwtDecode } from "jwt-decode";
+import { logout } from "./redux/actions/auth";
 
 function App() {
   let navigate = useNavigate();
@@ -21,11 +23,18 @@ function App() {
     return state.auth;
   });
 
-  useEffect(() => {
-    const token = getToken();
+  const dispatch: any = useDispatch();
 
+  useEffect(() => {
+    const token: any = getToken();
     if (!token) {
       navigate("/sign-in");
+    } else {
+      const decodedToken: any = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      if (decodedToken.exp < currentTime) {
+        dispatch(logout());
+      }
     }
   }, []);
 

@@ -32,8 +32,10 @@ const AllUsers = () => {
         <Loader />
       ) : (
         <div className="users-list">
-          {users.map((user) => (
-            <UserCard user={user} />
+          {users.map((user, userId) => (
+            <React.Fragment key={userId}>
+              <UserCard user={user} />
+            </React.Fragment>
           ))}
         </div>
       )}

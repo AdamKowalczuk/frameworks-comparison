@@ -17,7 +17,7 @@ const CreatePost = () => {
   const [fileURL, setFileURL] = useState<string | null>(null);
   const [tags, setTags] = useState("");
   const [loading, setLoading] = useState(false);
-  const { userId } = useSelector((state: any) => {
+  const { userId, imageUrl, userName } = useSelector((state: any) => {
     return state.auth.user;
   });
 
@@ -34,7 +34,7 @@ const CreatePost = () => {
 
     setLoading(true);
 
-    PostService.createPost({ userId, caption, file, location, tags })
+    PostService.createPost({ creator: { userId, imageUrl, userName }, caption, file, location, tags })
       .then(() => {
         navigate("/");
         setLoading(false);

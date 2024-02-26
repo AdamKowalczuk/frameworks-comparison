@@ -17,8 +17,7 @@ const UserCard = ({ user }: UserCardProps) => {
         <Link to={`/profile/${user._id}`} className="user-card">
           <img src={ProfilePlaceholder} alt="profile" />
           <div className="user-info">
-            <p className="user-name">{user.name}</p>
-            <p className="user-username">@{user.username}</p>
+            <p className="user-username">{user.userName}</p>
           </div>
           <Button text="See profile" />
         </Link>

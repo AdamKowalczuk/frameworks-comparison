@@ -2,7 +2,7 @@ import { SET_MESSAGE, CLEAR_MESSAGE } from "../actions/types";
 
 const initialState = {};
 
-export default function (state = initialState, action:any) {
+export default function (state = initialState, action: any) {
   const { type, payload } = action;
 
   switch (type) {
@@ -10,7 +10,10 @@ export default function (state = initialState, action:any) {
       return { message: payload };
 
     case CLEAR_MESSAGE:
-      return { message: "" };
+      return {
+        ...state,
+        message: undefined,
+      };
 
     default:
       return state;

@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import "../Login/Login.scss";
 import Button from "../../components/Button/Button";
 import TextButton from "../../components/TextButton/TextButton";
@@ -7,25 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/actions/auth";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import Snackbar from "../../components/Snackbar/Snackbar";
 
 const Register = () => {
   let navigate = useNavigate();
 
-  const [name, setName] = useState<string>("");
-  const [username, setUsername] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const { message } = useSelector((state: any) => state.message);
+
   const dispatch: any = useDispatch();
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
-
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    setUserName(e.target.value);
   };
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,16 +36,17 @@ const Register = () => {
 
   const handleSignUp = (e: any) => {
     e.preventDefault();
-
     setLoading(true);
 
-    dispatch(register(name, username, email, password))
+    dispatch(register(userName, email, password))
       .then(() => {
         setLoading(true);
-        navigate("/");
+        setShowSnackbar(true);
+        setTimeout(() => navigate("/"), 3000);
       })
       .catch(() => {
         setLoading(false);
+        setShowSnackbar(true);
       });
   };
 
@@ -61,10 +60,7 @@ const Register = () => {
         </div>
         <form onSubmit={handleSignUp} className="auth-form">
           <div className="form-group">
-            <InputText label="Name" placeholder="Name" onChange={handleNameChange} value={name} />
-          </div>
-          <div className="form-group">
-            <InputText label="Username" placeholder="Username" onChange={handleUsernameChange} value={username} />
+            <InputText label="Username" placeholder="Username" onChange={handleUsernameChange} value={userName} />
           </div>
           <div className="form-group">
             <InputText label="Email" placeholder="Email" onChange={handleEmailChange} value={email} />
@@ -91,6 +87,7 @@ const Register = () => {
           </Link>
         </div>
       </div>
+      <Snackbar message={message?.text} type={message?.type} isVisible={showSnackbar} onClose={() => setShowSnackbar(false)} />
     </div>
   );
 };

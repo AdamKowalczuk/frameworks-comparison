@@ -1,23 +1,18 @@
 import axios from "axios";
 import { INewUser } from "../types";
 
-const register = ({name, username, email, password}:INewUser) => {
+const register = ({ userName, email, password}:INewUser) => {
   return axios
     .post(`${process.env.REACT_APP_API_URL}/api/signup`, {
-      name,
-      username,
+      userName,
       email,
       password,
     })
     .then((response) => {
+
       if (response.data.token) {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({
-            userId: response.data.userId,
-            token: response.data.token,
-          })
-        );
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
       }
 
       return response.data;
@@ -34,7 +29,8 @@ const login = (email: string, password: string) => {
     })
     .then((response) => {
       if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
       }
 
       return response.data;
@@ -46,6 +42,7 @@ const login = (email: string, password: string) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("token");
 };
 
 export default {

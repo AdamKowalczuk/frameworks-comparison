@@ -12,7 +12,9 @@ import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 const LeftSidebar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: any) => {
+    return state.auth;
+  });
 
   const dispatch: any = useDispatch();
 
@@ -28,12 +30,11 @@ const LeftSidebar = () => {
           <h4>PostShare</h4>
         </Link>
 
-        <Link to={`/profile/${user.userId}`}>
+        <Link to={`/profile/${user?.userId}`}>
           <div className="sidebar-profile">
-            <img src={user.imageUrl ? user.imageUrl : ProfilePlaceholder} alt="profile" />
+            <img src={user?.imageUrl ? user?.imageUrl : ProfilePlaceholder} alt="profile" />
             <div className="user-info">
-              <p className="username">{user.username}</p>
-              <p className="text-secondary">@{user.name}</p>
+              <p className="username">{user?.userName}</p>
             </div>
           </div>
         </Link>
