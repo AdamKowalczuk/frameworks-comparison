@@ -23,7 +23,13 @@ export type IPost = {
   likes:any
   location?: string;
   tags?: string;
-  createdAt:string
+  createdAt:string,
+  _id:string,
+  creator:{
+    userId: string;
+    imageUrl:string;
+    userName:string
+  }
 };
 
 export type IUpdatePost = {

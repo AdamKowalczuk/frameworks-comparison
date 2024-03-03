@@ -5,10 +5,11 @@ import PostService from "../../services/postService";
 import { IPost } from "../../types";
 import Search from "../../components/Search/Search";
 import Loader from "../../components/Loader/Loader";
+import PostCard from "../../components/PostCard/PostCard";
 
 const Home = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
-  const [searchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [isPostsLoading, setIsPostsLoading] = useState<boolean>(false);
 
   const handleSearchPosts = () => {
@@ -19,6 +20,7 @@ const Home = () => {
         setIsPostsLoading(false);
       })
       .catch((error: any) => {
+        setPosts([]);
         console.error("Error fetching posts:", error);
       });
   };
@@ -41,17 +43,16 @@ const Home = () => {
         <HomeIcon />
         <h4>Home Page</h4>
       </div>
-      <Search placeholder="Search" onSearch={handleSearchPosts} />
+      <Search placeholder="Search" onSearch={handleSearchPosts} value={searchQuery} onChange={(e: any) => setSearchQuery(e)} />
       {isPostsLoading && !posts ? (
         <Loader />
       ) : (
         <div>
-          {posts.map((post) => {
+          {posts.map((post, postId) => {
             return (
-              <>
-                <p>{post.caption}</p>
-                <img src={post.imageUrl} alt={post.caption} />
-              </>
+              <React.Fragment key={postId}>
+                <PostCard post={post} />
+              </React.Fragment>
             );
           })}
         </div>

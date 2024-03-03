@@ -86,7 +86,7 @@ const searchPosts = (query: string) => {
     return Promise.reject("Token not found in localStorage");
   }
   return axios
-    .get(`${process.env.REACT_APP_API_URL}/api/posts/search?query=${query}`, {
+    .get(`${process.env.REACT_APP_API_URL}/api/posts/search/${query}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -199,6 +199,26 @@ const unsavePostById = (postId: string) => {
     });
 };
 
+const getLikedPosts = (userId:string) => {
+  const token = getToken();
+  if (!token) {
+    return Promise.reject("Token not found in localStorage");
+  }
+  return axios
+    .get(`${process.env.REACT_APP_API_URL}/api/posts/liked/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+
 export default {
   getPosts,
   createPost,
@@ -210,4 +230,5 @@ export default {
   unlikePostById,
   savePostById,
   unsavePostById,
+  getLikedPosts
 };

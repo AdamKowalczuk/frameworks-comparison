@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Search.scss";
 import { ReactComponent as SearchIcon } from "../../assets/icons/search.svg";
 
 interface SearchProps {
   placeholder?: string;
-
   onSearch: (query: string) => void;
+  value: string;
+  onChange: any;
 }
 
-const Search = ({ placeholder, onSearch }: SearchProps) => {
-  const [query, setQuery] = useState("");
+const Search = ({ placeholder, onSearch, value, onChange }: SearchProps) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value);
+    onChange(event.target.value);
   };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      onSearch(query);
+      onSearch(value);
     }
   };
   return (
@@ -25,7 +25,7 @@ const Search = ({ placeholder, onSearch }: SearchProps) => {
         type="search"
         className="input-search"
         placeholder={placeholder}
-        value={query}
+        value={value}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />
