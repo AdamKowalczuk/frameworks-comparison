@@ -4,6 +4,7 @@ import Textarea from "../../components/Textarea/Textarea";
 import InputText from "../../components/InputText/InputText";
 import Button from "../../components/Button/Button";
 import { ReactComponent as CreatePostIcon } from "../../assets/icons/gallery-add-black.svg";
+import { ReactComponent as FileUploadIcon } from "../../assets/icons/file-upload.svg";
 import { useNavigate } from "react-router-dom";
 import PostService from "../../services/postService";
 import { useSelector } from "react-redux";
@@ -63,10 +64,34 @@ const CreatePost = () => {
         <div className="image-upload-section">
           <label htmlFor="image-upload">Add Photos</label>
 
-          <input type="file" name="file" onChange={handleFileChange} />
-          <button type="submit">Upload</button>
+          <div className="add-photo-wrapper" style={{ marginTop: "8px" }}>
+            <FileUploadIcon />
+            <span>Upload a photo in PNG, JPG or SVG format</span>
+            <input type="file" id="upload" onChange={handleFileChange} hidden />
+            <label
+              htmlFor="upload"
+              style={{
+                backgroundColor: "white",
+                color: "#805AD5",
+                border: "1px solid",
+                borderColor: "#805AD5",
+                padding: "0 1rem",
+                height: "40px",
+                borderRadius: "0.3rem",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontWeight: "600",
+                fontSize: "16px",
+                width: "fit-content",
+              }}
+            >
+              Select from computer
+            </label>
 
-          {fileURL && <img src={fileURL} alt="Selected File" />}
+            {fileURL && <img src={fileURL} alt="Selected File" />}
+          </div>
         </div>
 
         <div className="location-section">

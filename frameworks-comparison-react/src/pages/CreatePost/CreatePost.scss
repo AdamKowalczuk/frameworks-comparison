@@ -7,6 +7,26 @@
   width: 100%;
   margin-top: 1rem;
 
+  .image-upload-section {
+    .add-photo-wrapper {
+      border: 1px solid $gray-200;
+      padding: 50px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 4px;
+      gap: 15px;
+      svg {
+        width: 70px;
+        margin-bottom: -20px;
+      }
+      img {
+        max-height: 250px;
+      }
+    }
+  }
+
   .buttons-section {
     display: flex;
     gap: 1rem;
