@@ -1,29 +1,29 @@
 import axios from "axios";
-import { INewUser } from "../types";
+// import { INewUser } from "../types/index";
 
-const register = ({ userName, email, password}:INewUser) => {
-  return axios
-    .post(`${process.env.REACT_APP_API_URL}/api/signup`, {
-      userName,
-      email,
-      password,
-    })
-    .then((response) => {
+// const register = ({ userName, email, password}:INewUser) => {
+//   return axios
+//     .post(`${process.env.REACT_APP_API_URL}/api/signup`, {
+//       userName,
+//       email,
+//       password,
+//     })
+//     .then((response) => {
 
-      if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-      }
+//       if (response.data.token) {
+//         localStorage.setItem("user", JSON.stringify(response.data.user));
+//         localStorage.setItem("token", JSON.stringify(response.data.token));
+//       }
 
-      return response.data;
-    }).catch((error) => {
-      throw error;
-    });;
-};
+//       return response.data;
+//     }).catch((error) => {
+//       throw error;
+//     });;
+// };
 
 const login = (email: string, password: string) => {
   return axios
-    .post(`${process.env.REACT_APP_API_URL}/api/signin`, {
+    .post(`${process.env.VUE_APP_API_URL}/api/signin`, {
       email,
       password,
     })
@@ -34,10 +34,10 @@ const login = (email: string, password: string) => {
       }
 
       return response.data;
-    }).catch((error) => {
+    })
+    .catch((error) => {
       throw error;
-    });;
-
+    });
 };
 
 const logout = () => {
@@ -46,7 +46,7 @@ const logout = () => {
 };
 
 export default {
-  register,
+  // register,
   login,
   logout,
 };

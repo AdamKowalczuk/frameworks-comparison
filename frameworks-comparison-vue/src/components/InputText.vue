@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <div :class="input - container">
+  <div :class="'input-container'">
     <label v-if="label" :class="['input-label', `input-label--${size}`]">{{
       label
     }}</label>
@@ -32,8 +32,6 @@ export default {
     />
   </div>
 </template>
-
-
 
 <style scoped lang="scss">
 @import "../assets/scss/variables.scss";

@@ -3,11 +3,14 @@ import Button from "../components/Button.vue";
 import InputText from "../components/InputText.vue";
 import TextButton from "../components/TextButton.vue";
 
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/useAuthStore";
 
-const email = ref('');
-const password = ref('');
+const authStore = useAuthStore();
+
+const email = ref("");
+const password = ref("");
 const loading = ref(false);
 
 const router = useRouter();
@@ -18,6 +21,20 @@ const handleEmailChange = (event: any) => {
 
 const handlePasswordChange = (event: any) => {
   password.value = event.target.value;
+};
+
+const handleLogin = (event: Event) => {
+  loading.value = true;
+
+  authStore
+    .login(email.value, password.value)
+    .then((res) => {
+      router.push("/");
+      loading.value = false;
+    })
+    .catch((error) => {
+      loading.value = false;
+    });
 };
 </script>
 
@@ -33,13 +50,20 @@ const handlePasswordChange = (event: any) => {
             Welcome back! Please enter your details
           </p>
         </div>
-        <form onSubmit="{handleLogin}" className="auth-form">
+        <form
+          v-on:submit.prevent="
+            {
+              handleLogin;
+            }
+          "
+          className="auth-form"
+        >
           <div className="form-group">
             <InputText
               label="Email"
               placeholder="Email"
-              onChange="{handleEmailChange}"
-              value="{email}"
+              :onChange="handleEmailChange"
+              :value="email"
             />
           </div>
           <div className="form-group">
@@ -47,8 +71,8 @@ const handlePasswordChange = (event: any) => {
               type="password"
               label="Password"
               placeholder="Password"
-              onChange="{handlePasswordChange}"
-              value="{password}"
+              :onChange="handlePasswordChange"
+              :value="password"
             />
           </div>
 
@@ -64,9 +88,9 @@ const handlePasswordChange = (event: any) => {
         </form>
         <div className="signup-link">
           <span>Don’t have an account? </span>
-          <Link to="/sign-up">
+          <router-link to="/sign-up">
             <TextButton text="Sign Up" />
-          </Link>
+          </router-link>
         </div>
       </div>
     </div>
