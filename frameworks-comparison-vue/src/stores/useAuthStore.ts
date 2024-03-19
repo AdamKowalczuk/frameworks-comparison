@@ -1,43 +1,39 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
 import AuthService from "@/services/authService";
+const userDataFromLocalStorage = localStorage.getItem("user");
+const tokenDataFromLocalStorage = localStorage.getItem("token");
 
-export const useAuthStore = defineStore("authStore", () => {
-  const userString = localStorage.getItem("user");
-  const tokenString = localStorage.getItem("token");
-
-  const user = ref(userString ? JSON.parse(userString) : null);
-  const token = ref(tokenString ? JSON.parse(tokenString) : null);
-  const isLoggedIn = ref(false);
-
-  function login(email: string, password: string): Promise<void> {
-    return AuthService.login(email, password).then(
-      (res: any) => {
-        user.value = res.user;
+export const useAuthStore = defineStore("authStore", {
+  state: () => ({
+    user: userDataFromLocalStorage ? JSON.parse(userDataFromLocalStorage) : null,
+    token: tokenDataFromLocalStorage ? JSON.parse(tokenDataFromLocalStorage) : null,
+  }),
+  getters: {
+    isLoggedIn: (state) => !!state.user,
+  },
+  actions: {
+    async login(email: string, password: string) {
+      try {
+        const res = await AuthService.login(email, password);
+        this.user = res.user;
         return Promise.resolve();
-      },
-      (error: any) => {
-        return Promise.reject();
+      } catch (error) {
+        return Promise.reject(error);
       }
-    );
-  }
-
-  function register(userName: string, email: string, password: string): Promise<void> {
-    return AuthService.register({ userName, email, password }).then(
-      (res: any) => {
-        user.value = res.user;
+    },
+    async register(userName: string, email: string, password: string) {
+      try {
+        const res = await AuthService.register({ userName, email, password });
+        this.user = res.user;
         return Promise.resolve();
-      },
-      (error: any) => {
-        return Promise.reject();
+      } catch (error) {
+        return Promise.reject(error);
       }
-    );
-  }
-
-  function logout(): void {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-  }
-
-  return { user, token, isLoggedIn, login, register, logout };
+    },
+    logout() {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      this.user = null;
+    },
+  },
 });
