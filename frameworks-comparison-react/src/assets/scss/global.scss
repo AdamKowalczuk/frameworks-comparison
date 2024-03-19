@@ -140,7 +140,8 @@ a {
   .title-wrapper {
     display: flex;
     gap: 16px;
-    svg {
+    svg,
+    img {
       height: 36px;
       width: auto;
     }

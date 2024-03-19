@@ -51,9 +51,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const authStore = useAuthStore();
-    // console.log("🚀 ~ router.beforeEach ~ authStore:", authStore.isLoggedIn);
     const token: any = getToken();
-    console.log("🚀 ~ router.beforeEach ~ token:", token);
     if (token) {
       const decodedToken: any = jwtDecode(token);
       const currentTime = Date.now() / 1000;
