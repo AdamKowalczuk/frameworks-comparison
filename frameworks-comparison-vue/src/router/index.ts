@@ -45,7 +45,7 @@ const routes = [
 const router = createRouter({
   routes,
   history: createWebHistory(),
-  base: process.env.VUE_APP_API_URL,
+  // base: process.env.VUE_APP_API_URL,
 });
 
 router.beforeEach((to, from, next) => {

@@ -1,10 +1,11 @@
 <script lang="ts">
+import { PropType } from "vue";
 export default {
   props: {
     variant: {
       type: String,
       default: "primary",
-      validator: (value) => ["primary", "outlined"].includes(value),
+      validator: (value: string) => ["primary", "outlined"].includes(value),
     },
     text: {
       type: String,
@@ -22,9 +23,9 @@ export default {
     iconLeft: String,
     iconRight: String,
     type: {
-      type: String,
+      type: String as PropType<"button" | "submit" | "reset" | undefined>,
       default: "button",
-      validator: (value) => ["submit", "reset", "button"].includes(value),
+      validator: (value: string) => ["button", "submit", "reset"].includes(value),
     },
   },
 };
