@@ -1,21 +1,27 @@
-<script setup lang="ts">
-import { computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
+<script>
+import { useRoute } from "vue-router";
 import { sidebarLinks } from "@/constants/index";
-import { INavLink } from "@/types";
 import { useAuthStore } from "@/stores/useAuthStore";
 import ProfilePlaceholder from "@/assets/icons/profile-placeholder.svg";
 
-const router = useRouter();
-const route = useRoute();
-const currentPath = route.path;
-
-const authStore = useAuthStore();
-console.log("🚀 ~ authStore:", authStore.user);
-
-const handleLogout = () => {
-  authStore.logout();
-  router.push("/sign-in");
+export default {
+  data() {
+    return {
+      sidebarLinks,
+      authStore: useAuthStore(),
+      route: useRoute(),
+      ProfilePlaceholder,
+    };
+  },
+  methods: {
+    isLinkActive(route) {
+      return this.route.path === route;
+    },
+    handleLogout() {
+      this.authStore.logout();
+      this.$router.push("/sign-in");
+    },
+  },
 };
 </script>
 
@@ -42,8 +48,8 @@ const handleLogout = () => {
           :class="[
             'left-sidebar-link',
             {
-              'left-sidebar-link--active': route.path == link.route,
-              'left-sidebar-link--inactive': route.path != link.route,
+              'left-sidebar-link--active': isLinkActive(link.route),
+              'left-sidebar-link--inactive': !isLinkActive(link.route),
             },
           ]"
         >

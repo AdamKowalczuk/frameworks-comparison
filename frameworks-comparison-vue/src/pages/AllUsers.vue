@@ -1,27 +1,37 @@
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
+<script lang="ts">
 import AllUsersIcon from "@/assets/icons/people-black.svg";
 import UserService from "../services/userService";
 import UserCard from "@/components/UserCard.vue";
 import Loader from "@/components/Loader.vue";
-import { IUser } from "@/types";
 
-const users = ref<IUser[]>([]);
-const loading = ref(false);
-
-onMounted(() => {
-  loading.value = true;
-  UserService.getUsers()
-    .then((response) => {
-      users.value = response.users;
-      console.log(response.users);
-
-      loading.value = false;
-    })
-    .catch((error) => {
-      loading.value = false;
-    });
-});
+export default {
+  data() {
+    return {
+      users: [],
+      loading: false,
+    };
+  },
+  components: {
+    UserCard,
+    Loader,
+  },
+  mounted() {
+    this.loading = true;
+    UserService.getUsers()
+      .then((response) => {
+        this.users = response.users;
+        this.loading = false;
+      })
+      .catch((error) => {
+        this.loading = false;
+      });
+  },
+  computed: {
+    AllUsersIcon() {
+      return AllUsersIcon;
+    },
+  },
+};
 </script>
 
 <template>

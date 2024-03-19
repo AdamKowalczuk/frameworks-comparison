@@ -1,5 +1,4 @@
 <script lang="ts">
-import { PropType } from "vue";
 export default {
   props: {
     variant: {
@@ -18,12 +17,12 @@ export default {
     size: {
       type: String,
       default: "medium",
-      validator: (value) => ["small", "medium", "large"].includes(value),
+      validator: (value: string) => ["small", "medium", "large"].includes(value),
     },
     iconLeft: String,
     iconRight: String,
     type: {
-      type: String as PropType<"button" | "submit" | "reset" | undefined>,
+      type: String,
       default: "button",
       validator: (value: string) => ["button", "submit", "reset"].includes(value),
     },

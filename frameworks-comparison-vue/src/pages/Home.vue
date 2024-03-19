@@ -1,27 +1,30 @@
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+<script lang="ts">
 import PostService from "../services/postService";
 
-const loading = ref(false);
-const router = useRouter();
-const posts = ref([]);
-
-const getPosts = () => {
-  loading.value = true;
-  PostService.getPosts()
-    .then((res) => {
-      posts.value = res.posts;
-      loading.value = false;
-    })
-    .catch((error) => {
-      loading.value = false;
-    });
+export default {
+  data() {
+    return {
+      loading: false,
+      posts: [],
+    };
+  },
+  methods: {
+    getPosts() {
+      this.loading = true;
+      PostService.getPosts()
+        .then((res) => {
+          this.posts = res.posts;
+          this.loading = false;
+        })
+        .catch((error) => {
+          this.loading = false;
+        });
+    },
+  },
+  mounted() {
+    this.getPosts();
+  },
 };
-
-onMounted(() => {
-  getPosts();
-});
 </script>
 
 <template>
