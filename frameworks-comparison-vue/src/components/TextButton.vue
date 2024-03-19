@@ -2,7 +2,10 @@
 export default {
   props: {
     text: String,
-    onClick: Function,
+    onClick: {
+      type: Function as () => void,
+      default: () => {},
+    },
   },
 };
 </script>
@@ -10,7 +13,6 @@ export default {
 <template>
   <span class="text-button" @click="onClick">{{ text }}</span>
 </template>
-
 
 <style scoped lang="scss">
 @import "../assets/scss/variables.scss";

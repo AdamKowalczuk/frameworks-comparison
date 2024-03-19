@@ -8,7 +8,10 @@ export default {
       default: "medium",
       validator: (value) => ["small", "medium", "large"].includes(value),
     },
-    onChange: Function,
+    onChange: {
+      type: Function as () => void,
+      default: () => {},
+    },
     value: String,
     type: {
       type: String,
@@ -20,16 +23,8 @@ export default {
 
 <template>
   <div :class="'input-container'">
-    <label v-if="label" :class="['input-label', `input-label--${size}`]">{{
-      label
-    }}</label>
-    <input
-      :type="type"
-      :placeholder="placeholder"
-      @input="onChange"
-      :value="value"
-      :class="['input-text', `input-text--${size}`]"
-    />
+    <label v-if="label" :class="['input-label', `input-label--${size}`]">{{ label }}</label>
+    <input :type="type" :placeholder="placeholder" @input="onChange" :value="value" :class="['input-text', `input-text--${size}`]" />
   </div>
 </template>
 

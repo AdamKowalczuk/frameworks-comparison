@@ -28,14 +28,7 @@ const handleLogout = () => {
 
       <router-link :to="`/profile/${authStore.user?.userId}`">
         <div class="sidebar-profile">
-          <img
-            :src="
-              authStore.user?.imageUrl
-                ? authStore.user?.imageUrl
-                : ProfilePlaceholder
-            "
-            alt="profile"
-          />
+          <img :src="authStore.user?.imageUrl ? authStore.user?.imageUrl : ProfilePlaceholder" alt="profile" />
           <div class="user-info">
             <p class="username">{{ authStore.user?.userName }}</p>
           </div>
@@ -49,8 +42,8 @@ const handleLogout = () => {
           :class="[
             'left-sidebar-link',
             {
-              'left-sidebar-link--active': currentPath == link.route,
-              'left-sidebar-link--inactive': currentPath != link.route,
+              'left-sidebar-link--active': route.path == link.route,
+              'left-sidebar-link--inactive': route.path != link.route,
             },
           ]"
         >
@@ -133,9 +126,8 @@ const handleLogout = () => {
 
   .left-sidebar-link {
     border-radius: 0.5rem;
-    transition-property: color, background-color, border-color,
-      text-decoration-color, fill, stroke, opacity, box-shadow, transform,
-      filter, backdrop-filter, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+      backdrop-filter, -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
     font-size: 16px;

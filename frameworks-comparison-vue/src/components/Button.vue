@@ -10,7 +10,10 @@ export default {
       type: String,
       default: "",
     },
-    onClick: Function,
+    onClick: {
+      type: Function as () => void,
+      default: () => {},
+    },
     size: {
       type: String,
       default: "medium",
@@ -28,15 +31,7 @@ export default {
 </script>
 
 <template>
-  <button
-    :type="type"
-    :class="[
-      'custom-button',
-      `custom-button--${variant}`,
-      `custom-button--${size}`,
-    ]"
-    @click="onClick"
-  >
+  <button :type="type" :class="['custom-button', `custom-button--${variant}`, `custom-button--${size}`]" @click="onClick">
     <slot></slot>
     <span v-if="iconLeft">{{ iconLeft }}</span>
     <span>{{ text }}</span>

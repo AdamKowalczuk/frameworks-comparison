@@ -8,7 +8,10 @@ export default {
       default: "medium",
       validator: (value) => ["small", "medium", "large"].includes(value),
     },
-    onChange: Function,
+    onChange: {
+      type: Function as () => void,
+      default: () => {},
+    },
     value: String,
   },
 };
@@ -16,22 +19,10 @@ export default {
 
 <template>
   <div class="textarea-container">
-    <label
-      v-if="label"
-      :class="['textarea-label', `textarea-label--${size}`]"
-      >{{ label }}</label
-    >
-    <textarea
-      class="textarea-text"
-      :class="['textarea-text--' + size]"
-      :value="value"
-      :placeholder="placeholder"
-      @input="onChange"
-    ></textarea>
+    <label v-if="label" :class="['textarea-label', `textarea-label--${size}`]">{{ label }}</label>
+    <textarea class="textarea-text" :class="['textarea-text--' + size]" :value="value" :placeholder="placeholder" @input="onChange"></textarea>
   </div>
 </template>
-
-
 
 <style scoped lang="scss">
 @import "src/assets/scss/variables.scss";
