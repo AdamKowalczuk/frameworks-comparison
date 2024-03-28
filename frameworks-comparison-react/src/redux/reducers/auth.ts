@@ -5,9 +5,9 @@ const tokenString = localStorage.getItem("token");
 const user = userString ? JSON.parse(userString) : null;
 const token = tokenString ? JSON.parse(tokenString) : null;
 
-const initialState = user ? { isLoggedIn: true, user, token } : { isLoggedIn: false, user: null, token:null };
+const initialState = user ? { isLoggedIn: true, user, token } : { isLoggedIn: false, user: null, token: null };
 
-export default function (state = initialState, action: any) {
+export default function authReducer(state = initialState, action: any) {
   const { type, payload } = action;
 
   switch (type) {
@@ -39,7 +39,7 @@ export default function (state = initialState, action: any) {
         ...state,
         isLoggedIn: false,
         user: null,
-        token:null
+        token: null,
       };
     default:
       return state;
