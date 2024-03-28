@@ -16,7 +16,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const { isLoggedIn } = useSelector((state: any) => state.auth);
-  const { message } = useSelector((state: any) => state.message);
+  // const { message } = useSelector((state: any) => state.message);
 
   const dispatch: any = useDispatch();
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {

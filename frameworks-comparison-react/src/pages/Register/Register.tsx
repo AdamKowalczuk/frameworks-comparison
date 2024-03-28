@@ -18,7 +18,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   // const [showSnackbar, setShowSnackbar] = useState(false);
 
-  const { message } = useSelector((state: any) => state.message);
+  // const { message } = useSelector((state: any) => state.message);
 
   const dispatch: any = useDispatch();
 
