@@ -1,11 +1,12 @@
 <script lang="ts">
 import PostService from "../services/postService";
+import { IPost } from "../types/index";
 
 export default {
   data() {
     return {
-      loading: false,
-      posts: [],
+      loading: false as boolean,
+      posts: [] as IPost[],
     };
   },
   methods: {

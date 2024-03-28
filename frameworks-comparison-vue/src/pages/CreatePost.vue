@@ -27,20 +27,20 @@ export default {
     Loader,
   },
   methods: {
-    handleFileChange(event) {
+    handleFileChange(event: any) {
       const selectedFile = event.target.files?.[0];
       if (selectedFile) {
         this.file = selectedFile;
         this.fileURL = URL.createObjectURL(selectedFile);
       }
     },
-    handleLocationChange(event) {
+    handleLocationChange(event: any) {
       this.location = event.target.value;
     },
-    handleTagsChange(event) {
+    handleTagsChange(event: any) {
       this.tags = event.target.value;
     },
-    handleCaptionChange(event) {
+    handleCaptionChange(event: any) {
       this.caption = event.target.value;
     },
     handleCreatePost() {
