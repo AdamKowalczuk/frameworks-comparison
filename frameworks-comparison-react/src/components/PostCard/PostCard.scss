@@ -1,0 +1,92 @@
+@import "src/assets/scss/variables.scss";
+
+.post-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .gap-3 {
+    margin-right: 0.75rem;
+  }
+
+  .w-12 {
+    width: 3rem;
+  }
+
+  .lg-h-12 {
+    height: 3rem;
+  }
+
+  .rounded-full {
+    border-radius: 9999px;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .flex-col {
+    flex-direction: column;
+  }
+
+  .base-medium {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  .lg-body-bold {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .text-light-1 {
+    color: #333;
+  }
+
+  .text-light-3 {
+    color: #666;
+  }
+
+  .subtle-semibold {
+    font-weight: 600;
+  }
+
+  .lg-small-regular {
+    font-size: 0.875rem;
+  }
+
+  .small-medium {
+    font-size: 1rem;
+  }
+
+  .lg-base-medium {
+    font-size: 1.125rem;
+  }
+
+  .py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+
+  .mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .post-card_img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 8px;
+  }
+}
