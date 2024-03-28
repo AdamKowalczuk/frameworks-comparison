@@ -1,7 +1,7 @@
 import React from "react";
 import "./Snackbar.scss";
 import { useDispatch } from "react-redux";
-import { clearMessage } from "../../redux/actions/message";
+// import { clearMessage } from "../../redux/actions/message";
 
 interface SnackbarProps {
   message: string;
@@ -15,7 +15,7 @@ const Snackbar = ({ message, type, onClose }: SnackbarProps) => {
 
   React.useEffect(() => {
     const timeout = setTimeout(() => {
-      dispatch(clearMessage());
+      // dispatch(clearMessage());
       onClose();
     }, 3000);
 

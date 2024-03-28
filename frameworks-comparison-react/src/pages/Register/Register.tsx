@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/actions/auth";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
-import Snackbar from "../../components/Snackbar/Snackbar";
+// import Snackbar from "../../components/Snackbar/Snackbar";
 
 const Register = () => {
   let navigate = useNavigate();
@@ -16,7 +16,7 @@ const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [showSnackbar, setShowSnackbar] = useState(false);
+  // const [showSnackbar, setShowSnackbar] = useState(false);
 
   const { message } = useSelector((state: any) => state.message);
 
@@ -41,12 +41,12 @@ const Register = () => {
     dispatch(register(userName, email, password))
       .then(() => {
         setLoading(true);
-        setShowSnackbar(true);
+        // setShowSnackbar(true);
         setTimeout(() => navigate("/"), 3000);
       })
       .catch(() => {
         setLoading(false);
-        setShowSnackbar(true);
+        // setShowSnackbar(true);
       });
   };
 
@@ -87,7 +87,7 @@ const Register = () => {
           </Link>
         </div>
       </div>
-      <Snackbar message={message?.text} type={message?.type} isVisible={showSnackbar} onClose={() => setShowSnackbar(false)} />
+      {/* <Snackbar message={message?.text} type={message?.type} isVisible={showSnackbar} onClose={() => setShowSnackbar(false)} /> */}
     </div>
   );
 };
