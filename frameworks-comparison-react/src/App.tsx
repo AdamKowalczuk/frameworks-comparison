@@ -5,7 +5,6 @@ import Home from "./pages/Home/Home";
 import Saved from "./pages/Saved/Saved";
 import AllUsers from "./pages/AllUsers/AllUsers";
 import CreatePost from "./pages/CreatePost/CreatePost";
-import EditPost from "./pages/EditPost/EditPost";
 import PostDetails from "./pages/PostDetails/PostDetails";
 import Profile from "./pages/Profile/Profile";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile";
@@ -50,9 +49,8 @@ function App() {
           <Route path="/saved" element={<Saved />} />
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/update-post/:id" element={<EditPost />} />
           <Route path="/posts/:id" element={<PostDetails />} />
-          <Route path="/profile/:id/*" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
           <Route path="/update-profile/:id" element={<UpdateProfile />} />
         </Route>
       </Routes>

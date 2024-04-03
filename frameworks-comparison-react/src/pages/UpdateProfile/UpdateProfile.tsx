@@ -1,31 +1,26 @@
 import React, { useState, ChangeEvent, useRef } from "react";
 import "./UpdateProfile.scss";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as UpdateIcon } from "../../assets/icons/edit.svg";
 import InputText from "../../components/InputText/InputText";
 import Button from "../../components/Button/Button";
 import Loader from "../../components/Loader/Loader";
 import Textarea from "../../components/Textarea/Textarea";
-import UserService from "../../services/userService";
-
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
+import { updateUser } from "../../redux/actions/auth";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state: any) => state.auth);
 
-  const [name, setName] = useState<string>(user.name);
   const [userName, setUserName] = useState<string>(user.userName);
   const [bio, setBio] = useState<string>(user.bio);
   const [file, setFile] = useState<any>(null);
   const [fileURL, setFileURL] = useState<string | null>(user.imageUrl);
   const [loading, setLoading] = useState(false);
   const fileInputRef: any = useRef(null);
-
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+  const dispatch: any = useDispatch();
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
@@ -37,14 +32,12 @@ const UpdateProfile = () => {
 
   const handleUpdateUser = () => {
     const userData = {
-      name,
       userName,
-      email: user.email,
       bio,
       file,
     };
 
-    UserService.editUser({ userId: user.userId, userData })
+    dispatch(updateUser(user.userId, userData))
       .then(() => {
         setLoading(false);
         navigate(`/profile/${user.userId}`);
@@ -96,7 +89,6 @@ const UpdateProfile = () => {
           </div>
         </div>
 
-        <InputText label="Name" placeholder="Name" onChange={handleNameChange} value={name} />
         <InputText label="Username" placeholder="Username" onChange={handleUsernameChange} value={userName} />
         <Textarea label="Bio" onChange={handleBioChange} value={bio} />
         <div className="buttons-section">

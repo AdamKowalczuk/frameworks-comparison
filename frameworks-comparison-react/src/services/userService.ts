@@ -33,8 +33,6 @@ const getUserById = (userId: string) => {
       },
     })
     .then((response) => {
-
-
       return response.data;
     })
     .catch((error) => {
@@ -47,7 +45,7 @@ interface EditUserData {
   userData: IUser;
 }
 
-const editUser = ({userId, userData}:EditUserData): Promise<IUser[]> => {
+const editUser = ({ userId, userData }: EditUserData): Promise<IUser> => {
   const token = getToken();
   if (!token) {
     return Promise.reject("Token not found in localStorage");
@@ -55,7 +53,7 @@ const editUser = ({userId, userData}:EditUserData): Promise<IUser[]> => {
   return axios
     .put(`${process.env.REACT_APP_API_URL}/api/users/${userId}`, userData, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       },
     })

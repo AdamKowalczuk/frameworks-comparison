@@ -7,10 +7,9 @@ import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 type GridPostListProps = {
   posts: IPost[];
   showUser?: boolean;
-  showStats?: boolean;
 };
 
-const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostListProps) => {
+const GridPostList = ({ posts, showUser = true }: GridPostListProps) => {
   return (
     <ul className="grid-container">
       {posts.map((post: IPost) => (
@@ -26,7 +25,6 @@ const GridPostList = ({ posts, showUser = true, showStats = true }: GridPostList
                 <p className="line-clamp-1">{post.creator.userName}</p>
               </div>
             )}
-            {/* {showStats && <PostStats post={post} userId={user.id} />} */}
           </div>
         </li>
       ))}

@@ -33,15 +33,7 @@ const Saved = () => {
         <SavedIcon />
         <h4>Saved</h4>
       </div>
-      {isPostsLoading && !savedPosts ? (
-        <Loader />
-      ) : (
-        <div>
-          {savedPosts.map((post) => {
-            return <GridPostList posts={savedPosts} showStats={false} />;
-          })}
-        </div>
-      )}
+      {isPostsLoading && !savedPosts ? <Loader /> : <GridPostList posts={savedPosts} />}
     </div>
   );
 };

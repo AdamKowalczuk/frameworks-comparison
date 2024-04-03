@@ -10,31 +10,38 @@ import PostCard from "../../components/PostCard/PostCard";
 const Home = () => {
   const [posts, setPosts] = useState<IPost[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [isPostsLoading, setIsPostsLoading] = useState<boolean>(false);
+  const [isPostsLoading, setIsPostsLoading] = useState<boolean>(true);
 
   const handleSearchPosts = () => {
     setIsPostsLoading(true);
-    PostService.searchPosts(searchQuery)
-      .then((response) => {
-        setPosts(response.posts);
+    if (searchQuery.length > 0) {
+      PostService.searchPosts(searchQuery)
+        .then((response) => {
+          setPosts(response.posts);
+          setIsPostsLoading(false);
+        })
+        .catch((error: any) => {
+          setPosts([]);
+          console.error("Error fetching posts:", error);
+        });
+    } else {
+      handleGetPosts();
+    }
+  };
+
+  const handleGetPosts = () => {
+    PostService.getPosts()
+      .then((response: any) => {
+        setPosts(response.posts.reverse());
         setIsPostsLoading(false);
       })
       .catch((error: any) => {
-        setPosts([]);
         console.error("Error fetching posts:", error);
       });
   };
 
   useEffect(() => {
-    setIsPostsLoading(true);
-    PostService.getPosts()
-      .then((response) => {
-        setPosts(response.posts);
-        setIsPostsLoading(false);
-      })
-      .catch((error: any) => {
-        console.error("Error fetching posts:", error);
-      });
+    handleGetPosts();
   }, []);
 
   return (
@@ -51,7 +58,7 @@ const Home = () => {
           {posts.map((post, postId) => {
             return (
               <React.Fragment key={postId}>
-                <PostCard post={post} />
+                <PostCard post={post} getPosts={handleGetPosts} />
               </React.Fragment>
             );
           })}

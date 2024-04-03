@@ -1,4 +1,4 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "../actions/types";
+import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, SET_USER } from "../actions/types";
 
 const userString = localStorage.getItem("user");
 const tokenString = localStorage.getItem("token");
@@ -40,6 +40,11 @@ export default function authReducer(state = initialState, action: any) {
         isLoggedIn: false,
         user: null,
         token: null,
+      };
+    case SET_USER:
+      return {
+        ...state,
+        user: payload.user,
       };
     default:
       return state;
