@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Saved.scss";
 import { ReactComponent as SavedIcon } from "../../assets/icons/bookmark-black.svg";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/loader/Loader";
 import { IPost } from "../../types";
 import PostService from "../../services/postService";
 import { useSelector } from "react-redux";
-import GridPostList from "../../components/GridPostList/GridPostList";
+import GridPostList from "../../components/grid-post-list/GridPostList";
 
 const Saved = () => {
   const [isPostsLoading, setIsPostsLoading] = useState<boolean>(false);

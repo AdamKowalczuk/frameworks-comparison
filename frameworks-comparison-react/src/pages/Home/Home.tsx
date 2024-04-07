@@ -3,9 +3,9 @@ import "./Home.scss";
 import { ReactComponent as HomeIcon } from "../../assets/icons/home-black.svg";
 import PostService from "../../services/postService";
 import { IPost } from "../../types";
-import Search from "../../components/Search/Search";
-import Loader from "../../components/Loader/Loader";
-import PostCard from "../../components/PostCard/PostCard";
+import Search from "../../components/search/Search";
+import Loader from "../../components/loader/Loader";
+import PostCard from "../../components/post-card/PostCard";
 
 const Home = () => {
   const [posts, setPosts] = useState<IPost[]>([]);

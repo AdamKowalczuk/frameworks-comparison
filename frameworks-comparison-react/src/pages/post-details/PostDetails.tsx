@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./PostDetails.scss";
-import PostCard from "../../components/PostCard/PostCard";
+import PostCard from "../../components/post-card/PostCard";
 import PostService from "../../services/postService";
 import { IPost } from "../../types";
 import { ReactComponent as BackIcon } from "../../assets/icons/back.svg";
 import { useParams } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/loader/Loader";
 import { useNavigate } from "react-router-dom";
 
 const PostDetails = () => {

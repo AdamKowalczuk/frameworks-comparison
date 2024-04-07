@@ -1,12 +1,12 @@
 import React, { useState, ChangeEvent } from "react";
 import "./Login.scss";
-import Button from "../../components/Button/Button";
-import TextButton from "../../components/TextButton/TextButton";
-import InputText from "../../components/InputText/InputText";
+import Button from "../../components/button/Button";
+import TextButton from "../../components/text-button/TextButton";
+import InputText from "../../components/input-text/InputText";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../redux/actions/auth";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/loader/Loader";
 
 const Login = () => {
   let navigate = useNavigate();

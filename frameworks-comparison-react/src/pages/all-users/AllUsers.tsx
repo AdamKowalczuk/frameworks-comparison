@@ -3,8 +3,8 @@ import "./AllUsers.scss";
 import { ReactComponent as AllUsersIcon } from "../../assets/icons/people-black.svg";
 import UserService from "../../services/userService";
 import { IUser } from "../../types";
-import UserCard from "../../components/UserCard/UserCard";
-import Loader from "../../components/Loader/Loader";
+import UserCard from "../../components/user-card/UserCard";
+import Loader from "../../components/loader/Loader";
 
 const AllUsers = () => {
   const [users, setUsers] = useState<IUser[]>([]);

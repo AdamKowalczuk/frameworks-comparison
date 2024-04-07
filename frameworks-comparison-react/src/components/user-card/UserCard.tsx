@@ -2,7 +2,7 @@ import React from "react";
 import "./UserCard.scss";
 import { IUser } from "../../types";
 import { Link } from "react-router-dom";
-import Button from "../Button/Button";
+import Button from "../button/Button";
 
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 

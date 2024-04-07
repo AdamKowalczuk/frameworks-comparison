@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.scss";
 import { useNavigate, useParams } from "react-router-dom";
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 import { IPost, IUser } from "../../types";
 import { useSelector } from "react-redux";
 import UserService from "../../services/userService";

@@ -3,10 +3,10 @@ import "./UpdateProfile.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as UpdateIcon } from "../../assets/icons/edit.svg";
-import InputText from "../../components/InputText/InputText";
-import Button from "../../components/Button/Button";
-import Loader from "../../components/Loader/Loader";
-import Textarea from "../../components/Textarea/Textarea";
+import InputText from "../../components/input-text/InputText";
+import Button from "../../components/button/Button";
+import Loader from "../../components/loader/Loader";
+import Textarea from "../../components/textarea/Textarea";
 import ProfilePlaceholder from "../../assets/icons/profile-placeholder.svg";
 import { updateUser } from "../../redux/actions/auth";
 

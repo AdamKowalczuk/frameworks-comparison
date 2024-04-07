@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./CreatePost.scss";
-import Textarea from "../../components/Textarea/Textarea";
-import InputText from "../../components/InputText/InputText";
-import Button from "../../components/Button/Button";
+import Textarea from "../../components/textarea/Textarea";
+import InputText from "../../components/input-text/InputText";
+import Button from "../../components/button/Button";
 import { ReactComponent as CreatePostIcon } from "../../assets/icons/gallery-add-black.svg";
 import { ReactComponent as FileUploadIcon } from "../../assets/icons/file-upload.svg";
 import { useNavigate } from "react-router-dom";
 import PostService from "../../services/postService";
 import { useSelector } from "react-redux";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../components/loader/Loader";
 
 const CreatePost = () => {
   const navigate = useNavigate();
