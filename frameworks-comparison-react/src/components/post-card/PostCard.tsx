@@ -37,7 +37,7 @@ const PostCard = ({ post, getPosts }: PostCardProps) => {
     <div className="post-card">
       <div className="post-header">
         <Link to={`/profile/${post.creator.userId}`}>
-          <img src={post.creator?.imageUrl || ProfilePlaceholder} alt="creator" />
+          <img src={post.creator?.imageUrl || ProfilePlaceholder} className="post-avatar" alt="creator" />
         </Link>
 
         <div className="post-details">
