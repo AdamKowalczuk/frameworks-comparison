@@ -5,7 +5,6 @@ import Home from "../pages/Home.vue";
 import Saved from "../pages/Saved.vue";
 import AllUsers from "../pages/AllUsers.vue";
 import CreatePost from "../pages/CreatePost.vue";
-import EditPost from "../pages/EditPost.vue";
 import PostDetails from "../pages/PostDetails.vue";
 import Profile from "../pages/Profile.vue";
 import UpdateProfile from "../pages/UpdateProfile.vue";
@@ -26,7 +25,6 @@ const routes = [
       { path: "saved", name: "Saved", component: Saved, meta: { requiresAuth: true } },
       { path: "all-users", name: "All users", component: AllUsers, meta: { requiresAuth: true } },
       { path: "create-post", name: "Create post", component: CreatePost, meta: { requiresAuth: true } },
-      { path: "update-post/:id", name: "Edit post", component: EditPost, meta: { requiresAuth: true } },
       { path: "posts/:id", name: "Post details", component: PostDetails, meta: { requiresAuth: true } },
       { path: "profile/:id", name: "Profile", component: Profile, meta: { requiresAuth: true } },
       { path: "update-profile/:id", name: "Update profile", component: UpdateProfile, meta: { requiresAuth: true } },

@@ -1,20 +1,20 @@
-<script lang="ts">
+<script>
 import LoaderIcon from "../assets/icons/loader.svg";
 
 export default {
-props:{
-
-}
+  computed: {
+    LoaderIcon() {
+      return LoaderIcon;
+    },
+  },
 };
 </script>
 
 <template>
   <div class="loader">
-    <LoaderIcon />
+    <img :src="LoaderIcon" alt="loader" />
   </div>
 </template>
-
-
 
 <style scoped lang="scss">
 @import "src/assets/scss/variables.scss";

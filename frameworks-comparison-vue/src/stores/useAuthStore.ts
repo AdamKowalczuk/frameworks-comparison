@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import AuthService from "@/services/authService";
+import type { IUser } from "@/types/index";
+import UserService from "@/services/userService";
 const userDataFromLocalStorage = localStorage.getItem("user");
 const tokenDataFromLocalStorage = localStorage.getItem("token");
 
@@ -30,6 +32,21 @@ export const useAuthStore = defineStore("authStore", {
         return Promise.reject(error);
       }
     },
+    async updateUser(userId: string, userData: IUser) {
+      try {
+        const data: any = await UserService.editUser({ userId: userId, userData });
+        this.user = {
+          imageUrl: data.user.imageUrl,
+          userId: data.user._id,
+          userName: data.user.userName,
+          bio: data.user.bio,
+        };
+        return Promise.resolve();
+      } catch (error) {
+        return Promise.reject();
+      }
+    },
+
     logout() {
       localStorage.removeItem("user");
       localStorage.removeItem("token");

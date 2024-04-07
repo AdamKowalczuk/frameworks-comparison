@@ -140,6 +140,10 @@ a {
   .title-wrapper {
     display: flex;
     gap: 16px;
+    .title-wrapper-img {
+      height: 36px;
+      width: auto;
+    }
     svg {
       height: 36px;
       width: auto;

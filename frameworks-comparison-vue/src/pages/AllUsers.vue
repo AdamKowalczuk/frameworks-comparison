@@ -37,7 +37,7 @@ export default {
 <template>
   <div class="right-container">
     <div class="title-wrapper">
-      <img :src="AllUsersIcon" alt="all users" />
+      <img :src="AllUsersIcon" alt="all users" class="title-wrapper-img" />
       <h4>Users</h4>
     </div>
     <div v-if="loading && !users">

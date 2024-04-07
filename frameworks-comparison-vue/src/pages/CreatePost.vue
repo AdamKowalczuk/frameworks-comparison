@@ -83,13 +83,13 @@ export default {
 <template>
   <div class="right-container">
     <div class="title-wrapper">
-      <img :src="CreatePostIcon" alt="Create post" />
+      <img :src="CreatePostIcon" alt="Create post" class="title-wrapper-img" />
       <h4>Create Post</h4>
     </div>
 
     <form @submit.prevent="handleCreatePost" class="create-post-form">
       <div class="caption-section">
-        <Textarea label="Caption" :onChange="handleCaptionChange" :value="caption" />
+        <Textarea label="Caption" placeholder="Caption" :onChange="handleCaptionChange" :value="caption" />
       </div>
 
       <div class="image-upload-section">
@@ -124,7 +124,7 @@ export default {
       </div>
 
       <div class="location-section">
-        <InputText label="Add Location" placeholder="location" :onChange="handleLocationChange" :value="location" />
+        <InputText label="Add Location" placeholder="Location" :onChange="handleLocationChange" :value="location" />
       </div>
 
       <div class="tags-section">

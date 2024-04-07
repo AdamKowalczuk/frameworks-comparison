@@ -12,7 +12,7 @@ const props = defineProps<{
 <template>
   <div class="user-item">
     <router-link :to="`/profile/${user._id}`" class="user-card">
-      <img :src="ProfilePlaceholderIcon" alt="profile" />
+      <img :src="user.imageUrl ? user.imageUrl : ProfilePlaceholderIcon" alt="profile" class="user-card-img" />
       <div class="user-info">
         <p class="user-username">{{ user.userName }}</p>
       </div>
@@ -35,6 +35,11 @@ const props = defineProps<{
     padding: 2rem 1.25rem;
     align-items: center;
     justify-content: center;
+    .user-card-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 100%;
+    }
     .user-info {
       display: flex;
       align-items: center;
