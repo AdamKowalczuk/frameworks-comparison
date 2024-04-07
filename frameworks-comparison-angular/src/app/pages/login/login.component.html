@@ -1,0 +1,34 @@
+<div class="auth-page">
+  <div class="left-side">
+    <h2 class="logo">PostShare</h2>
+    <div class="auth-header">
+      <h4>Log in to your account</h4>
+      <p class="normal-md gray-500">Welcome back! Please enter your details</p>
+    </div>
+    <!-- <form
+    [formGroup]="loginForm"
+     (ngSubmit)="onSubmit()" class="auth-form"> -->
+      <div class="form-group">
+        <app-input-text label="Email" placeholder="Email" formControlName="email"></app-input-text>
+      </div>
+      <div class="form-group">
+        <app-input-text label="Password" placeholder="Password" type="password" formControlName="password"></app-input-text>
+      </div>
+      <app-button type="submit">
+        <ng-container *ngIf="loading; else elseBlock">
+          <div class="loader-wrapper">
+            <app-loader></app-loader>
+            Loading...
+          </div>
+        </ng-container>
+        <ng-template #elseBlock>
+          Log in
+        </ng-template>
+      </app-button>
+    <!-- </form> -->
+    <div class="signup-link">
+      <span>Don’t have an account? </span>
+      <a routerLink="/sign-up" class="text-button">Sign Up</a>
+    </div>
+  </div>
+</div>

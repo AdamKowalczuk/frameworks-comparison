@@ -1,0 +1,36 @@
+<nav class="left-sidebar">
+    <div class="sidebar-wrapper">
+      <a routerLink="/">
+        <h4>PostShare</h4>
+      </a>
+
+      <a [routerLink]="['/profile', user?.userId]">
+        <div class="sidebar-profile">
+          <img [src]="user?.imageUrl ? user?.imageUrl : 'assets/icons/profile-placeholder.svg'" alt="profile" />
+          <div class="user-info">
+            <p class="username">{{ user?.userName }}</p>
+          </div>
+        </div>
+      </a>
+
+      <ul>
+        <li *ngFor="let link of sidebarLinks" [class.left-sidebar-link]="true"
+        [class.left-sidebar-link--active]="router.url === link.route"
+        >
+          <a [routerLink]="link.route">
+            <img [src]="link.imgURL" alt="{{ link.label }}" />
+            {{ link.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <ul>
+      <li class="left-sidebar-link" (click)="handleLogout()">
+        <div class="logout-button">
+          <img src="assets/icons/logout.svg" alt="logout" />
+          Logout
+        </div>
+      </li>
+    </ul>
+  </nav>

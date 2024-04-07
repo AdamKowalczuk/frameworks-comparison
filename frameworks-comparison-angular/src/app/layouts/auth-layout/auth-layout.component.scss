@@ -1,0 +1,21 @@
+@import "../../../assets/scss//variables.scss";
+
+.auth-layout {
+  display: flex;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fill-available;
+}
+
+.auth-image {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  img {
+    max-width: 500px;
+    height: fit-content;
+  }
+}

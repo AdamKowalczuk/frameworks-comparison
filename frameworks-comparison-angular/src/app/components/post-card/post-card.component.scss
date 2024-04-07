@@ -1,0 +1,58 @@
+@import "../../../assets/scss/variables.scss";
+
+.post-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .post-header {
+    display: flex;
+    gap: 20px;
+    .post-details {
+      .post-creator {
+        font-weight: bold;
+      }
+      .post-date-location {
+        display: flex;
+        gap: 10px;
+        color: $gray-500;
+        font-weight: 400;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .post-title {
+      font-weight: bold;
+    }
+    .post-tags {
+      font-size: 14px;
+      color: $gray-500;
+      font-weight: 400;
+      display: flex;
+      gap: 10px;
+    }
+    .post-img {
+      max-height: 300px;
+      width: fit-content;
+    }
+    .likes-wrapper {
+      display: flex;
+      gap: 7px;
+      color: $primary-500;
+      .like-icon {
+        // height: 20px;
+        width: fit-content;
+        cursor: pointer;
+      }
+    }
+  }
+}

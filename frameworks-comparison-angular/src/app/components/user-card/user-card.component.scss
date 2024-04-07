@@ -1,0 +1,30 @@
+@import "../../../assets/scss/variables.scss";
+
+.user-item {
+  width: 100%;
+  .user-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 1rem;
+    border: 1px solid $gray-200;
+    padding: 2rem 1.25rem;
+    align-items: center;
+    justify-content: center;
+    .user-info {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .user-name {
+        color: $black;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .user-username {
+        color: $gray-500;
+        font-size: 12px;
+      }
+    }
+  }
+}

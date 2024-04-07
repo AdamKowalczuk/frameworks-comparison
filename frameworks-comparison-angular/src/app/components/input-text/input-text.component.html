@@ -1,0 +1,4 @@
+<div class="input-container">
+    <label *ngIf="label" [class]="'input-label input-label--' + size">{{ label }}</label>
+    <input [type]="type" [placeholder]="placeholder" [value]="value" (input)="onChange($event)" class="input-text" [class.input-text--small]="size === 'small'" [class.input-text--medium]="size === 'medium'" [class.input-text--large]="size === 'large'" />
+  </div>
