@@ -54,7 +54,7 @@ export default {
   <div class="right-container">
     <div class="user-profile">
       <div class="profile-header">
-        <img :src="activeUser ? activeUser.imageUrl : ProfilePlaceholder" alt="profile" class="profile-img" />
+        <img :src="activeUser?.imageUrl ? activeUser.imageUrl : ProfilePlaceholder" alt="profile" class="profile-img" />
         <div class="profile-info">
           <p class="profile-username">{{ activeUser ? activeUser.userName : "" }}</p>
           <p class="profile-bio">{{ activeUser ? activeUser.bio : "" }}</p>

@@ -12,6 +12,11 @@ export default {
       default: true,
     },
   },
+  data() {
+    return {
+      ProfilePlaceholder,
+    };
+  },
 };
 </script>
 
@@ -24,7 +29,7 @@ export default {
 
       <div class="grid-post_user" v-if="showUser">
         <div class="grid-post_user-wrapper">
-          <img :src="post.creator.imageUrl || ProfilePlaceholder" alt="creator" class="w-8 h-8 rounded-full" />
+          <img :src="post.creator.imageUrl ? post.creator.imageUrl : ProfilePlaceholder" alt="creator" class="w-8 h-8 rounded-full" />
           <p class="line-clamp-1">{{ post.creator.userName }}</p>
         </div>
       </div>

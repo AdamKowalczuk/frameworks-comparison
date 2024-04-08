@@ -63,32 +63,16 @@ const handleSignUp = () => {
         class="auth-form"
       >
         <div class="form-group">
-          <InputText
-            label="Username"
-            placeholder="Username"
-            :onChange="handleUsernameChange"
-            :value="userName"
-          />
+          <InputText label="Username" placeholder="Username" :onChange="handleUsernameChange" :value="userName" />
         </div>
         <div class="form-group">
-          <InputText
-            label="Email"
-            placeholder="Email"
-            :onChange="handleEmailChange"
-            :value="email"
-          />
+          <InputText label="Email" placeholder="Email" :onChange="handleEmailChange" :value="email" />
         </div>
         <div class="form-group">
-          <InputText
-            type="password"
-            label="Password"
-            placeholder="Password"
-            :onChange="handlePasswordChange"
-            :value="password"
-          />
+          <InputText type="password" label="Password" placeholder="Password" :onChange="handlePasswordChange" :value="password" />
         </div>
 
-        <Button type="submit">
+        <Button type="submit" :onClick="handleSignUp">
           <template v-if="loading">
             <div class="loader-wrapper">
               <Loader />

@@ -54,7 +54,8 @@ export default {
       };
 
       this.loading = true;
-      updateUser(this.user.userId, userData)
+      this.authStore
+        .updateUser(this.user.userId, userData)
         .then(() => {
           this.loading = false;
           this.$router.push(`/profile/${this.user.userId}`);

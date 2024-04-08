@@ -2,7 +2,7 @@
 import Button from "../components/Button.vue";
 import InputText from "../components/InputText.vue";
 import TextButton from "../components/TextButton.vue";
-
+import Loader from "../components/Loader.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/useAuthStore";
@@ -46,9 +46,7 @@ const handleLogin = (event: Event) => {
         <div className="auth-header">
           <h4>Log in to your account</h4>
 
-          <p className="normal-md gray-500">
-            Welcome back! Please enter your details
-          </p>
+          <p className="normal-md gray-500">Welcome back! Please enter your details</p>
         </div>
         <form
           v-on:submit.prevent="
@@ -59,21 +57,10 @@ const handleLogin = (event: Event) => {
           className="auth-form"
         >
           <div className="form-group">
-            <InputText
-              label="Email"
-              placeholder="Email"
-              :onChange="handleEmailChange"
-              :value="email"
-            />
+            <InputText label="Email" placeholder="Email" :onChange="handleEmailChange" :value="email" />
           </div>
           <div className="form-group">
-            <InputText
-              type="password"
-              label="Password"
-              placeholder="Password"
-              :onChange="handlePasswordChange"
-              :value="password"
-            />
+            <InputText type="password" label="Password" placeholder="Password" :onChange="handlePasswordChange" :value="password" />
           </div>
 
           <Button @click="handleLogin" type="submit">
