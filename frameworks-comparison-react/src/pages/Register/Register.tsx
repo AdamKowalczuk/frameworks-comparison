@@ -1,13 +1,12 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 import "../login/Login.scss";
 import Button from "../../components/button/Button";
 import TextButton from "../../components/text-button/TextButton";
 import InputText from "../../components/input-text/InputText";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { register } from "../../redux/actions/auth";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
-// import Snackbar from "../../components/Snackbar/Snackbar";
 
 const Register = () => {
   let navigate = useNavigate();
@@ -16,9 +15,6 @@ const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  // const [showSnackbar, setShowSnackbar] = useState(false);
-
-  // const { message } = useSelector((state: any) => state.message);
 
   const dispatch: any = useDispatch();
 
@@ -41,12 +37,11 @@ const Register = () => {
     dispatch(register(userName, email, password))
       .then(() => {
         setLoading(true);
-        // setShowSnackbar(true);
+
         setTimeout(() => navigate("/"), 3000);
       })
       .catch(() => {
         setLoading(false);
-        // setShowSnackbar(true);
       });
   };
 
@@ -87,7 +82,6 @@ const Register = () => {
           </Link>
         </div>
       </div>
-      {/* <Snackbar message={message?.text} type={message?.type} isVisible={showSnackbar} onClose={() => setShowSnackbar(false)} /> */}
     </div>
   );
 };
