@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./Home.scss";
 import { ReactComponent as HomeIcon } from "../../assets/icons/home-black.svg";
 import PostService from "../../services/postService";
 import { IPost } from "../../types";

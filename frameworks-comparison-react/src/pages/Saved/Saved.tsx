@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import "./Saved.scss";
+import { useEffect, useState } from "react";
 import { ReactComponent as SavedIcon } from "../../assets/icons/bookmark-black.svg";
 import Loader from "../../components/loader/Loader";
 import { IPost } from "../../types";

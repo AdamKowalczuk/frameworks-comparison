@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import "./PostDetails.scss";
+import { useEffect, useState } from "react";
 import PostCard from "../../components/post-card/PostCard";
 import PostService from "../../services/postService";
 import { IPost } from "../../types";
