@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +8,6 @@ import { SavedComponent } from './pages/saved/saved.component';
 import { AllUsersComponent } from './pages/all-users/all-users.component';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { HomeComponent } from './pages/home/home.component';
-import { LikedPostsComponent } from './pages/liked-posts/liked-posts.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PostDetailsComponent } from './pages/post-details/post-details.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -25,6 +25,11 @@ import { SearchComponent } from './components/search/search.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { TextButtonComponent } from './components/text-button/text-button.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './store/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,6 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     AllUsersComponent,
     CreatePostComponent,
     HomeComponent,
-    LikedPostsComponent,
     LoginComponent,
     PostDetailsComponent,
     ProfileComponent,
@@ -52,7 +56,15 @@ import { UserCardComponent } from './components/user-card/user-card.component';
     TextButtonComponent,
     UserCardComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    StoreModule.forRoot({ auth: authReducer }),
+    EffectsModule.forRoot([AuthEffects]),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
