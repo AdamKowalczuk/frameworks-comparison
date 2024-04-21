@@ -1,1 +1,9 @@
-<p>user-card works!</p>
+<div class="user-item">
+    <a [routerLink]="['/profile', user?._id]" class="user-card">
+      <img [src]='user?.imageUrl ? user?.imageUrl : "../../../assets/icons/profile-placeholder.svg"' alt="profile" class="user-card-img" />
+      <div class="user-info">
+        <p class="user-username">{{ user?.userName }}</p>
+      </div>
+      <app-button text="See profile"></app-button>
+    </a>
+  </div>

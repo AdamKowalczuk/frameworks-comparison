@@ -1,1 +1,11 @@
-<p>search works!</p>
+  <div class="search-container">
+    <input
+      type="search"
+      class="input-search"
+      [placeholder]="placeholder"
+      [(ngModel)]="value"
+      (input)="onChange(value)"
+      (keypress)="handleKeyPress($event)"
+    />
+    <img src="assets/icons/search.svg" alt="search" class="search-icon" />
+  </div>

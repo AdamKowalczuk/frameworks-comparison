@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent {
-  constructor() {}
+  loaderIcon = '../../../assets/icons/loader.svg';
 }

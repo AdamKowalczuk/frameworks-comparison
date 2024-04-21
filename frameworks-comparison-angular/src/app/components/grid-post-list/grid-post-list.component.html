@@ -1,1 +1,14 @@
-<p>grid-post-list works!</p>
+<ul class="grid-container">
+  <li *ngFor="let post of posts" class="relative min-w-80 h-80">
+    <a [routerLink]="'/posts/' + post._id" class="grid-post_link">
+      <img [src]='post.imageUrl ? post.imageUrl : "../../../assets/icons/profile-placeholder.svg"' alt="post" class="h-full w-full object-cover" />
+    </a>
+
+    <div class="grid-post_user" *ngIf="showUser">
+      <div class="grid-post_user-wrapper">
+        <img [src]="post.creator?.imageUrl || 'path/to/default/image'" alt="creator" class="w-8 h-8 rounded-full" />
+        <p class="line-clamp-1">{{ post.creator?.userName }}</p>
+      </div>
+    </div>
+  </li>
+</ul>

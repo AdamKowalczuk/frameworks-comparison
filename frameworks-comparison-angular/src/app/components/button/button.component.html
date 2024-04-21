@@ -1,5 +1,6 @@
 <button [type]="type" (click)="handleClick()" class="custom-button" [ngClass]="['custom-button--' + variant, 'custom-button--' + size]">
-    {{ iconLeft }}
+  <ng-content></ng-content>
+  {{ iconLeft }}
     {{ text }}
     {{ iconRight }}
   </button>

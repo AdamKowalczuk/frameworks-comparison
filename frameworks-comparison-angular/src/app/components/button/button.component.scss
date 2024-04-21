@@ -13,6 +13,7 @@
   border-radius: 6px;
   transition: background-color 0.3s ease;
   white-space: nowrap;
+  width: -webkit-fill-available;
 }
 
 .custom-button--primary {

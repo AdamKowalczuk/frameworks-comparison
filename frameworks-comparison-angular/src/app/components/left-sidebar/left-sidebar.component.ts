@@ -1,8 +1,10 @@
+// sidebar.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { sidebarLinks } from '../../../constants/index';
-import { INavLink } from '../../../types';
-// import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/authService';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-left-sidebar',
@@ -10,18 +12,28 @@ import { INavLink } from '../../../types';
   styleUrls: ['./left-sidebar.component.scss'],
 })
 export class LeftSidebarComponent {
-  sidebarLinks: INavLink[] = sidebarLinks;
-  user: any;
+  sidebarLinks = sidebarLinks;
+  ProfilePlaceholder = '../../../assets/icons/profile-placeholder.svg';
+  auth$: Observable<any>;
+  user: any = null;
 
   constructor(
-    // private authService: AuthService,
-    public router: Router
+    private authService: AuthService,
+    private router: Router,
+    private store: Store<{ auth: any }>
   ) {
-    // this.user = this.authService.getCurrentUser(); // Implementacja tej metody zależy od logiki w AuthService
+    this.auth$ = this.store.pipe(select('auth'));
+    this.auth$.subscribe((auth) => {
+      this.user = auth.user;
+    });
   }
 
-  handleLogout() {
-    // this.authService.logout(); // Implementacja metody logout w AuthService
-    this.router.navigate(['/sign-in']);
+  isLinkActive(route: string): boolean {
+    return this.router.url === route;
+  }
+
+  handleLogout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl('/sign-in');
   }
 }

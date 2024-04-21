@@ -12,6 +12,11 @@
   .post-header {
     display: flex;
     gap: 20px;
+    .post-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 100%;
+    }
     .post-details {
       .post-creator {
         font-weight: bold;

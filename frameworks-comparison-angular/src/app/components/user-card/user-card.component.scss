@@ -11,6 +11,11 @@
     padding: 2rem 1.25rem;
     align-items: center;
     justify-content: center;
+    .user-card-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 100%;
+    }
     .user-info {
       display: flex;
       align-items: center;

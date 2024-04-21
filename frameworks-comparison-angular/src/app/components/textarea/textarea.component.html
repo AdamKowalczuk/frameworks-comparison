@@ -1,1 +1,11 @@
-<p>textarea works!</p>
+<div class="textarea-container">
+  <label *ngIf="label" [class]="'textarea-label textarea-label--' + size">{{
+    label
+  }}</label>
+  <textarea
+    [class]="['textarea-text--' + size]"
+    [(ngModel)]="value"
+    (input)="onChange(value)"
+    [placeholder]="placeholder"
+  ></textarea>
+</div>

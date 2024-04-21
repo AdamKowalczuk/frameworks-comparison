@@ -1,1 +1,28 @@
-<p>post-card works!</p>
+<div class="post-card">
+  <div class="post-header">
+    <a [routerLink]="'/profile/' + post.creator.userId">
+      <img [src]="post.creator?.imageUrl || '../../../assets/icons/profile-placeholder.svg'" class="post-avatar" alt="creator" />
+    </a>
+    <div class="post-details">
+      <p class="post-creator">{{ post.creator.userName }}</p>
+      <div class="post-date-location">
+        <p>{{ formatPostDate(post.createdAt) }}</p>
+        <p>{{ post.location }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <a [routerLink]="'/posts/' + post._id">
+      <p class="post-title">{{ post.caption }}</p>
+    </a>
+    <div class="post-tags">
+      <span *ngFor="let tag of post.tags">{{ '#' + tag }}</span>
+    </div>
+    <img [src]="post.imageUrl" alt="post" class="post-img" />
+    <div class="likes-wrapper">
+      <img [src]="post.likes.includes(user.userId) ? '../../../assets/icons/liked.svg' : '../../../assets/icons/like.svg'" alt="like" class="like-icon" (click)="post.likes.includes(user.userId) ? handleUnlikePost() : handleLikePost()" />
+      <span>{{ post.likes.length }}</span>
+    </div>
+  </div>
+</div>
