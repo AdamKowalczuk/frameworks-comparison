@@ -1,1 +1,12 @@
-<p>post-details works!</p>
+<div class="right-container">
+    <div class="title-wrapper">
+      <img src="../../../assets/icons/back.svg" alt="back">
+      <h4>Back</h4>
+    </div>
+    <ng-container *ngIf="isPostLoading && !post; else postDetails">
+      <app-loader></app-loader>
+    </ng-container>
+    <ng-template #postDetails>
+      <app-post-card [post]="post" (getPosts)="getPost()"></app-post-card>
+    </ng-template>
+  </div>

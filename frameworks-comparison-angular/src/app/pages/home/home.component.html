@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div class="right-container">
+    <div class="title-wrapper">
+        <img src="../../../assets/icons/home-black.svg" alt="Saved icon">
+      <h4>Home Page</h4>
+    </div>
+    <app-search placeholder="Search" (onSearch)="searchPosts()" formControlName="searchQuery"></app-search>
+    <ng-container *ngIf="isPostsLoading | async; else postsList">
+      <app-loader></app-loader>
+    </ng-container>
+    <ng-template #postsList>
+      <div>
+        <app-post-card *ngFor="let post of posts; let i = index" [post]="post" (getPosts)="getPosts()"></app-post-card>
+      </div>
+    </ng-template>
+  </div>

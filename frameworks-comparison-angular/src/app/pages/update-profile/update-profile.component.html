@@ -1,1 +1,33 @@
-<p>update-profile works!</p>
+<div class="right-container">
+    <div class="title-wrapper">
+     <img src="../../../assets/icons/edit.svg" alt="edit">
+      <h4>Edit Profile</h4>
+    </div>
+    <div class="update-profile-container">
+      <div class="profile-photo">
+        <img *ngIf="fileURL" [src]="fileURL" alt="profile" class="profile-img" />
+        <img *ngIf="!fileURL && user.imageUrl" [src]="user.imageUrl" alt="profile" class="profile-img" />
+        <img *ngIf="!fileURL && !user.imageUrl" src="assets/icons/profile-placeholder.svg" alt="profile" class="profile-img" />
+
+        <div class="profile-input-file">
+          <input id="fileInput" type="file" name="file" (change)="handleFileChange($event)" style="display: none" />
+          <p class="custom-file-button" (click)="handleButtonClick()">Change profile photo</p>
+        </div>
+      </div>
+
+      <app-input-text label="Username" placeholder="Username" formControlName="userName" ></app-input-text>
+      <app-textarea label="Bio" formControlName="bio"></app-textarea>
+      <div class="buttons-section">
+        <app-button class="btn btn-outlined" (click)="handleCancel()">Cancel</app-button>
+        <app-button class="btn" (click)="handleUpdateUser()">
+          <ng-container *ngIf="loading; else updateProfileText">
+            <div class="loader-wrapper">
+              <app-loader></app-loader>
+              Loading...
+            </div>
+          </ng-container>
+          <ng-template #updateProfileText>Update Profile</ng-template>
+        </app-button>
+      </div>
+    </div>
+  </div>

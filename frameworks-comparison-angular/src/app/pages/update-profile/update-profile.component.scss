@@ -1,0 +1,45 @@
+@import "../../../assets//scss/variables.scss";
+
+:host {
+  width: 100%;
+}
+
+.update-profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-top: 1rem;
+  .profile-photo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    .profile-input-file {
+      background: transparent;
+      color: $primary-500;
+    }
+    p {
+      color: $primary-500;
+      cursor: pointer;
+    }
+    img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 100%;
+    }
+  }
+  .buttons-section {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .profile-input-file .custom-file-button {
+    cursor: pointer;
+    color: $primary-500;
+  }
+
+  .profile-input-file .custom-file-button:hover {
+    color: $primary-700;
+  }
+}

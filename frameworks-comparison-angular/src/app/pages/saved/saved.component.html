@@ -1,1 +1,12 @@
-<p>saved works!</p>
+<div class="right-container">
+    <div class="title-wrapper">
+      <img src="../../../assets/icons/bookmark-black.svg" alt="bookmark">
+      <h4>Saved</h4>
+    </div>
+    <div *ngIf="isPostsLoading.value && !savedPosts" class="loader-wrapper">
+      <app-loader></app-loader>
+      Loading...
+    </div>
+
+    <app-grid-post-list *ngIf="!isPostsLoading.value && savedPosts" [posts]="savedPosts"></app-grid-post-list>
+  </div>

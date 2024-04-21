@@ -1,1 +1,33 @@
-<p>register works!</p>
+<div class="auth-page">
+    <div class="left-side">
+      <h2 class="logo">PostShare</h2>
+      <div class="auth-header">
+        <h4>Create a new account</h4>
+        <p class="normal-md gray-500">Please enter your details</p>
+      </div>
+      <form [formGroup]="registerForm" (ngSubmit)="handleSignUp()" class="auth-form">
+        <div class="form-group">
+          <app-input-text label="Username" placeholder="Username" formControlName="userName"></app-input-text>
+        </div>
+        <div class="form-group">
+          <app-input-text label="Email" placeholder="Email" formControlName="email"></app-input-text>
+        </div>
+        <div class="form-group">
+          <app-input-text type="password" label="Password" placeholder="Password" formControlName="password"></app-input-text>
+        </div>
+        <app-button type="submit">
+          <ng-container *ngIf="loading; else signupText">
+            <div class="loader-wrapper">
+              <app-loader></app-loader>
+              Loading...
+            </div>
+          </ng-container>
+          <ng-template #signupText>Sign Up</ng-template>
+        </app-button>
+      </form>
+      <div class="login-link">
+        <span>Already have an account? </span>
+        <a routerLink="/sign-in" class="btn btn-link"><app-text-button>Log in</app-text-button></a>
+      </div>
+    </div>
+  </div>

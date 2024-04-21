@@ -1,1 +1,14 @@
-<p>all-users works!</p>
+<div class="right-container">
+    <div class="title-wrapper">
+      <img src="../../assets/icons/people-black.svg" alt="people">
+      <h4>Users</h4>
+    </div>
+    <div *ngIf="isUsersLoading && !users; else usersList" class="loader-container">
+      <app-loader></app-loader>
+    </div>
+    <ng-template #usersList>
+      <div class="users-list">
+        <app-user-card *ngFor="let user of users; let userId = index" [user]="user"></app-user-card>
+      </div>
+    </ng-template>
+  </div>

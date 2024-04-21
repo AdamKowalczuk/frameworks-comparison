@@ -1,1 +1,13 @@
-<p>profile works!</p>
+<div class="right-container">
+    <div class="user-profile">
+      <div class="profile-header">
+        <img [src]='activeUser?.imageUrl ? activeUser?.imageUrl : "../../../assets/icons/profile-placeholder.svg"' alt="profile" class="profile-img" />
+        <div class="profile-info">
+          <p class="profile-username">{{ activeUser?.userName }}</p>
+          <p class="profile-bio">{{ activeUser?.bio }}</p>
+        </div>
+
+        <app-button *ngIf="activeUser && user?.userId === activeUser?._id" class="btn btn-primary" (click)="handleEditProfile()">Edit Profile</app-button>
+      </div>
+    </div>
+  </div>

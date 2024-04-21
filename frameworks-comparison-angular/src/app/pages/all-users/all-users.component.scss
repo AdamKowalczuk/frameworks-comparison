@@ -1,0 +1,12 @@
+@import "../../../assets//scss/variables.scss";
+
+:host {
+  width: 100%;
+}
+
+.users-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  gap: 1.75rem;
+}
