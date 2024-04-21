@@ -1,76 +1,50 @@
-import axios from 'axios';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { IUser } from '../types';
 import { getToken } from '../utils/authUtils';
+import { environment } from '../../environment';
 
-const getUsers = () => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
-  }
-  return axios
-    .get(`${process.env['ANGULAR_APP_API_URL']}/api/users`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
-
-const getUserById = (userId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
-  }
-  return axios
-    .get(`${process.env['ANGULAR_APP_API_URL']}/api/users/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
+const env = environment.ANGULAR_APP_API_URL;
 
 interface EditUserData {
   userId: string;
   userData: IUser;
 }
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+  constructor(private http: HttpClient) {}
 
-const editUser = ({ userId, userData }: EditUserData): Promise<IUser[]> => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
-  }
-  return axios
-    .put(
-      `${process.env['ANGULAR_APP_API_URL']}/api/users/${userId}`,
-      userData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
+  private getHeaders(): HttpHeaders {
+    const token = getToken();
+    if (!token) {
+      throw new Error('Token not found in localStorage');
+    }
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
     });
-};
+  }
 
-export default {
-  getUsers,
-  getUserById,
-  editUser,
-};
+  getUsers(): Observable<any> {
+    return this.http
+      .get<any>(`${env}/api/users`, { headers: this.getHeaders() })
+      .pipe(catchError((error) => throwError(error)));
+  }
+
+  getUserById(userId: string): Observable<any> {
+    return this.http
+      .get<any>(`${env}/api/users/${userId}`, { headers: this.getHeaders() })
+      .pipe(catchError((error) => throwError(error)));
+  }
+
+  editUser(userId: string, userData: IUser): Observable<any> {
+    return this.http
+      .put<any>(`${env}/api/users/${userId}`, userData, {
+        headers: this.getHeaders(),
+      })
+      .pipe(catchError((error) => throwError(error)));
+  }
+}

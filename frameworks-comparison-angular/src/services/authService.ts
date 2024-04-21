@@ -1,52 +1,47 @@
-import axios from 'axios';
 import { INewUser } from '../types';
+import { environment } from '../../environment';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, map } from 'rxjs';
 
-const register = ({ userName, email, password }: INewUser) => {
-  return axios
-    .post(`${process.env['ANGULAR_APP_API_URL']}/api/signup`, {
-      userName,
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        localStorage.setItem('token', JSON.stringify(response.data.token));
-      }
+const env = environment.ANGULAR_APP_API_URL;
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  constructor(private http: HttpClient) {}
+  register(newUser: INewUser): Observable<any> {
+    return this.http.post<any>(`${env}/api/signup`, newUser).pipe(
+      map((response) => {
+        if (response.token) {
+          localStorage.setItem('user', JSON.stringify(response.user));
+          localStorage.setItem('token', JSON.stringify(response.token));
+        }
+        return response;
+      }),
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
 
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
+  login(email: string, password: string): Observable<any> {
+    return this.http.post<any>(`${env}/api/signin`, { email, password }).pipe(
+      map((response) => {
+        if (response.token) {
+          localStorage.setItem('user', JSON.stringify(response.user));
+          localStorage.setItem('token', JSON.stringify(response.token));
+        }
+        return response;
+      }),
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
 
-const login = (email: string, password: string) => {
-  return axios
-    .post(`${process.env['ANGULAR_APP_API_URL']}/api/signin`, {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        localStorage.setItem('token', JSON.stringify(response.data.token));
-      }
-
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
-
-const logout = () => {
-  localStorage.removeItem('user');
-  localStorage.removeItem('token');
-};
-
-export default {
-  register,
-  login,
-  logout,
-};
+  logout(): void {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  }
+}

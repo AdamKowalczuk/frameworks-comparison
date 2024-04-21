@@ -1,247 +1,113 @@
-import axios from 'axios';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { INewPost, IUpdatePost } from '../types';
 import { getToken } from '../utils/authUtils';
+import { environment } from '../../environment';
 
-const getPosts = () => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
-  }
-  return axios
-    .get(`${process.env['ANGULAR_APP_API_URL']}/api/posts`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
+const env = environment.ANGULAR_APP_API_URL;
+@Injectable({
+  providedIn: 'root',
+})
+export class PostService {
+  constructor(private http: HttpClient) {}
+
+  private getHeaders(): HttpHeaders {
+    const token = getToken();
+    if (!token) {
+      throw new Error('Token not found in localStorage');
+    }
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
     });
-};
-
-const createPost = (postData: INewPost) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
   }
-  return axios
-    .post(`${process.env['ANGULAR_APP_API_URL']}/api/posts`, postData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const editPostById = (postId: string, postData: IUpdatePost) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  getPosts(): Observable<any> {
+    return this.http
+      .get<any>(`${env}/api/posts`, { headers: this.getHeaders() })
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .put(
-      `${process.env['ANGULAR_APP_API_URL']}/api/posts/${postId}`,
-      postData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const getPostById = (postId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  createPost(postData: INewPost): Observable<any> {
+    return this.http
+      .post<any>(`${env}/api/posts`, postData, { headers: this.getHeaders() })
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .get(`${process.env['ANGULAR_APP_API_URL']}/api/posts/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const searchPosts = (query: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  editPostById(postId: string, postData: IUpdatePost): Observable<any> {
+    return this.http
+      .put<any>(`${env}/api/posts/${postId}`, postData, {
+        headers: this.getHeaders(),
+      })
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .get(`${process.env['ANGULAR_APP_API_URL']}/api/posts/search/${query}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const deletePostById = (postId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  getPostById(postId: string): Observable<any> {
+    return this.http
+      .get<any>(`${env}/api/posts/${postId}`, { headers: this.getHeaders() })
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .delete(`${process.env['ANGULAR_APP_API_URL']}/api/posts/${postId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const likePostById = (postId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  searchPosts(query: string): Observable<any> {
+    return this.http
+      .get<any>(`${env}/api/posts/search/${query}`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .post(
-      `${process.env['ANGULAR_APP_API_URL']}/api/posts/${postId}/like`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const unlikePostById = (postId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  deletePostById(postId: string): Observable<any> {
+    return this.http
+      .delete<any>(`${env}/api/posts/${postId}`, { headers: this.getHeaders() })
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .post(
-      `${process.env['ANGULAR_APP_API_URL']}/api/posts/${postId}/unlike`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const savePostById = (postId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  likePostById(postId: string): Observable<any> {
+    return this.http
+      .post<any>(
+        `${env}/api/posts/${postId}/like`,
+        {},
+        { headers: this.getHeaders() }
+      )
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .post(
-      `${process.env['ANGULAR_APP_API_URL']}/api/posts/${postId}/save`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const unsavePostById = (postId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  unlikePostById(postId: string): Observable<any> {
+    return this.http
+      .post<any>(
+        `${env}/api/posts/${postId}/unlike`,
+        {},
+        { headers: this.getHeaders() }
+      )
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .post(
-      `${process.env['ANGULAR_APP_API_URL']}/api/posts/${postId}/unsave`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-const getLikedPosts = (userId: string) => {
-  const token = getToken();
-  if (!token) {
-    return Promise.reject('Token not found in localStorage');
+  savePostById(postId: string): Observable<any> {
+    return this.http
+      .post<any>(
+        `${env}/api/posts/${postId}/save`,
+        {},
+        { headers: this.getHeaders() }
+      )
+      .pipe(catchError((error) => throwError(error)));
   }
-  return axios
-    .get(`${process.env['ANGULAR_APP_API_URL']}/api/posts/liked/${userId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      throw error;
-    });
-};
 
-export default {
-  getPosts,
-  createPost,
-  editPostById,
-  getPostById,
-  searchPosts,
-  deletePostById,
-  likePostById,
-  unlikePostById,
-  savePostById,
-  unsavePostById,
-  getLikedPosts,
-};
+  unsavePostById(postId: string): Observable<any> {
+    return this.http
+      .post<any>(
+        `${env}/api/posts/${postId}/unsave`,
+        {},
+        { headers: this.getHeaders() }
+      )
+      .pipe(catchError((error) => throwError(error)));
+  }
+
+  getLikedPosts(userId: string): Observable<any> {
+    return this.http
+      .get<any>(`${env}/api/posts/liked/${userId}`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(catchError((error) => throwError(error)));
+  }
+}
