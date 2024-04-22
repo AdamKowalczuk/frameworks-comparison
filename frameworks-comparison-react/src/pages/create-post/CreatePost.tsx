@@ -37,7 +37,7 @@ const CreatePost = () => {
 
     PostService.createPost({ creator: { userId, imageUrl, userName }, caption, file, location, tags })
       .then(() => {
-        navigate("/");
+        navigate("/home");
         setLoading(false);
       })
       .catch(() => {

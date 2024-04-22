@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Home from "./pages/home/Home";
@@ -8,8 +8,8 @@ import CreatePost from "./pages/create-post/CreatePost";
 import PostDetails from "./pages/post-details/PostDetails";
 import Profile from "./pages/profile/Profile";
 import UpdateProfile from "./pages/update-profile/UpdateProfile";
-import { useSelector, useDispatch } from "react-redux";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import AuthLayout from "./layouts/auth-layout/AuthLayout";
 import RootLayout from "./layouts/root-layout/RootLayout";
 import { getToken } from "./utils/authUtils";
@@ -18,14 +18,13 @@ import { logout } from "./redux/actions/auth";
 
 function App() {
   let navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state: any) => {
-    return state.auth;
-  });
+  const location = useLocation();
 
   const dispatch: any = useDispatch();
 
   useEffect(() => {
     const token: any = getToken();
+
     if (!token) {
       navigate("/sign-in");
     } else {
@@ -33,6 +32,10 @@ function App() {
       const currentTime = Date.now() / 1000;
       if (decodedToken.exp < currentTime) {
         dispatch(logout());
+      } else {
+        if (location.pathname === "/") {
+          navigate("/home");
+        }
       }
     }
   }, []);
@@ -45,7 +48,7 @@ function App() {
           <Route path="/sign-up" element={<Register />} />
         </Route>
         <Route element={<RootLayout />}>
-          <Route index element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/saved" element={<Saved />} />
           <Route path="/all-users" element={<AllUsers />} />
           <Route path="/create-post" element={<CreatePost />} />

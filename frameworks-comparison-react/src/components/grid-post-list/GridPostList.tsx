@@ -1,4 +1,3 @@
-import React from "react";
 import "./GridPostList.scss";
 import { IPost } from "../../types";
 import { Link } from "react-router-dom";

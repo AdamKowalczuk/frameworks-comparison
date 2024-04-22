@@ -6,7 +6,6 @@ const RootLayout = () => {
   return (
     <div className="root-layout">
       <LeftSidebar />
-
       <Outlet />
     </div>
   );

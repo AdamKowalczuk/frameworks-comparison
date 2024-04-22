@@ -38,7 +38,7 @@ const Register = () => {
       .then(() => {
         setLoading(true);
 
-        setTimeout(() => navigate("/"), 3000);
+        setTimeout(() => navigate("/home"), 3000);
       })
       .catch(() => {
         setLoading(false);

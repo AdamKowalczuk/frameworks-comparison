@@ -1,4 +1,3 @@
-import React from "react";
 import "./UserCard.scss";
 import { IUser } from "../../types";
 import { Link } from "react-router-dom";

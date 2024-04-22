@@ -1,9 +1,9 @@
-import React, { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 import "./Login.scss";
 import Button from "../../components/button/Button";
 import TextButton from "../../components/text-button/TextButton";
 import InputText from "../../components/input-text/InputText";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../redux/actions/auth";
 import Loader from "../../components/loader/Loader";
@@ -14,9 +14,6 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
-
-  const { isLoggedIn } = useSelector((state: any) => state.auth);
-  // const { message } = useSelector((state: any) => state.message);
 
   const dispatch: any = useDispatch();
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +31,7 @@ const Login = () => {
 
     dispatch(login(email, password))
       .then(() => {
-        navigate("/");
+        navigate("/home");
         setLoading(false);
       })
       .catch(() => {

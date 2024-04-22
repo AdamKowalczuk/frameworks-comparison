@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./AuthLayout.scss";
@@ -12,7 +11,7 @@ const AuthLayout = () => {
   return (
     <>
       {isLoggedIn ? (
-        <Navigate to="/" />
+        <Navigate to="/home" />
       ) : (
         <>
           <div className="auth-layout">

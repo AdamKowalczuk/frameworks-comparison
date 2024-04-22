@@ -1,4 +1,3 @@
-import React from "react";
 import "./Loader.scss";
 import { ReactComponent as LoaderIcon } from "../../assets/icons/loader.svg";
 

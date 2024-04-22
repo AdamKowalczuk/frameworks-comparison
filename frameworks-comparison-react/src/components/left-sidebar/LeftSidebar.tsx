@@ -1,4 +1,3 @@
-import React from "react";
 import "./LeftSidebar.scss";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { sidebarLinks } from "../../constants/index";

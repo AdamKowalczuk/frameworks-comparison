@@ -6,7 +6,7 @@ import CreatePost from "../assets/icons/gallery-add.svg";
 export const sidebarLinks = [
   {
     imgURL: Home,
-    route: "/",
+    route: "/home",
     label: "Home",
   },
   {

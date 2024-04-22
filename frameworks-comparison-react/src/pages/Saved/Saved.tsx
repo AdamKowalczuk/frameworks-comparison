@@ -24,7 +24,7 @@ const Saved = () => {
       .catch((error: any) => {
         console.error("Error fetching posts:", error);
       });
-  }, []);
+  }, [user.userId]);
 
   return (
     <div className="right-container">
