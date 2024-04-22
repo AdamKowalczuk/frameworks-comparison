@@ -1,12 +1,12 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { AuthService } from '../../services/authService';
 import {
-  Login,
   LoginSuccess,
   LoginFail,
   RegisterSuccess,
+  RegisterFail,
 } from './auth.actions';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
@@ -15,8 +15,6 @@ import { Router } from '@angular/router';
 export class AuthEffects {
   constructor(
     private actions$: Actions,
-    // @Inject(authService) private authService: any
-    // private authService: any
     private authService: AuthService,
     private router: Router
   ) {}
@@ -55,7 +53,7 @@ export class AuthEffects {
                 new RegisterSuccess({ user });
                 this.router.navigate(['/']);
               }),
-              catchError(() => of(new LoginFail()))
+              catchError(() => of(new RegisterFail()))
             )
         )
       ),
