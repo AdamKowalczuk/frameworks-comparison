@@ -80,5 +80,9 @@ export default {
     min-height: 80px;
     border-radius: 6px;
   }
+
+  .textarea-text::placeholder {
+    color: $gray-400;
+  }
 }
 </style>
