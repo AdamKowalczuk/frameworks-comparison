@@ -5,13 +5,13 @@ export type INavLink = {
 };
 
 export type INewPost = {
-  creator:{
+  creator: {
     userId: string;
-    imageUrl:string;
-    userName:string
-  }
+    imageUrl: string;
+    userName: string;
+  };
   caption: string;
-  file: File[];
+  file: File[] | null;
   location?: string;
   tags?: string;
 };
@@ -20,16 +20,16 @@ export type IPost = {
   userId: string;
   caption: string;
   imageUrl: string;
-  likes:any
+  likes: any;
   location?: string;
   tags?: string;
-  createdAt:string,
-  _id:string,
-  creator:{
+  createdAt: string;
+  _id: string;
+  creator: {
     userId: string;
-    imageUrl:string;
-    userName:string
-  }
+    imageUrl: string;
+    userName: string;
+  };
 };
 
 export type IUpdatePost = {

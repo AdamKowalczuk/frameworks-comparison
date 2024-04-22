@@ -3,7 +3,7 @@
     label
   }}</label>
   <textarea
-    [class]="['textarea-text--' + size]"
+    [class]="'textarea-text textarea-text--' + size"
     [(ngModel)]="value"
     (input)="onChange(value)"
     [placeholder]="placeholder"

@@ -5,7 +5,7 @@
       <h4>Log in to your account</h4>
       <p class="normal-md gray-500">Welcome back! Please enter your details</p>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="handleLogin()"  class="auth-form">
+    <form [formGroup]="loginForm" (ngSubmit)="handleLogin()" class="auth-form">
       <div class="form-group">
         <app-input-text label="Email" placeholder="Email" formControlName='email'/>
       </div>

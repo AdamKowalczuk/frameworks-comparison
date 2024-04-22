@@ -3,7 +3,7 @@
      <img src="../../../assets/icons/edit.svg" alt="edit">
       <h4>Edit Profile</h4>
     </div>
-    <div class="update-profile-container">
+    <form [formGroup]="updateProfileForm" (ngSubmit)="handleUpdateUser()" class="update-profile-container">
       <div class="profile-photo">
         <img *ngIf="fileURL" [src]="fileURL" alt="profile" class="profile-img" />
         <img *ngIf="!fileURL && user.imageUrl" [src]="user.imageUrl" alt="profile" class="profile-img" />
@@ -16,9 +16,9 @@
       </div>
 
       <app-input-text label="Username" placeholder="Username" formControlName="userName" ></app-input-text>
-      <app-textarea label="Bio" formControlName="bio"></app-textarea>
+      <app-textarea label="Bio" placeholder="Bio" formControlName="bio"></app-textarea>
       <div class="buttons-section">
-        <app-button class="btn btn-outlined" (click)="handleCancel()">Cancel</app-button>
+        <app-button variant="outlined" class="btn" (click)="handleCancel()">Cancel</app-button>
         <app-button class="btn" (click)="handleUpdateUser()">
           <ng-container *ngIf="loading; else updateProfileText">
             <div class="loader-wrapper">
@@ -29,5 +29,5 @@
           <ng-template #updateProfileText>Update Profile</ng-template>
         </app-button>
       </div>
-    </div>
+    </form>
   </div>

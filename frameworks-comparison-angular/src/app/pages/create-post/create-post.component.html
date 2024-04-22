@@ -4,9 +4,9 @@
       <h4>Create Post</h4>
     </div>
 
-    <form (submit)="handleCreatePost($event)" class="create-post-form">
+    <form [formGroup]="createPostForm" (ngSubmit)="handleCreatePost($event)" class="create-post-form">
       <div class="caption-section">
-        <app-textarea label="Caption" [(ngModel)]="caption"></app-textarea>
+        <app-textarea label="Caption" placeholder="Caption" formControlName="caption"></app-textarea>
       </div>
 
       <div class="image-upload-section">
@@ -23,16 +23,16 @@
       </div>
 
       <div class="location-section">
-        <app-input-text label="Add Location" [(ngModel)]="location"></app-input-text>
+        <app-input-text label="Add Location" placeholder="Location" formControlName="location"></app-input-text>
       </div>
 
       <div class="tags-section">
-        <app-input-text label="Add Tags (separate by comma “,”)" placeholder="Travel, Art, Sport" [(ngModel)]="tags"></app-input-text>
+        <app-input-text label="Add Tags (separate by comma “,”)" placeholder="Travel, Art, Sport" formControlName="tags"></app-input-text>
       </div>
 
       <div class="buttons-section">
-        <button class="btn btn-outlined" type="button" (click)="handleCancel()">Cancel</button>
-        <button class="btn" type="submit">
+        <app-button variant="outlined" class="btn" type="button" (click)="handleCancel()">Cancel</app-button>
+        <app-button class="btn" type="submit">
           <ng-container *ngIf="loading; else createPostText">
             <div class="loader-wrapper">
               <app-loader></app-loader>
@@ -40,7 +40,7 @@
             </div>
           </ng-container>
           <ng-template #createPostText>Create Post</ng-template>
-        </button>
+        </app-button>
       </div>
     </form>
   </div>

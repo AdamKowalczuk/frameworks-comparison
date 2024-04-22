@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/authService';
 import { PostService } from '../../../services/postService';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-create-post',
@@ -9,18 +12,28 @@ import { PostService } from '../../../services/postService';
   styleUrls: ['./create-post.component.scss'],
 })
 export class CreatePostComponent {
-  caption: string = '';
-  location: string = '';
-  tags: string = '';
-  file: File | null = null;
+  createPostForm: FormGroup = new FormGroup({
+    caption: new FormControl(''),
+    location: new FormControl(''),
+    tags: new FormControl(''),
+  });
+  file: File[] | null = null;
   fileURL: string | null = null;
   loading: boolean = false;
+  auth$: Observable<any>;
+  user: any = null;
 
   constructor(
     private authService: AuthService,
     private postService: PostService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private store: Store<{ auth: any }>
+  ) {
+    this.auth$ = this.store.pipe(select('auth'));
+    this.auth$.subscribe((auth) => {
+      this.user = auth.user;
+    });
+  }
 
   handleFileChange(event: any): void {
     const selectedFile = event.target.files?.[0];
@@ -33,27 +46,29 @@ export class CreatePostComponent {
   handleCreatePost(event: any): void {
     event.preventDefault();
 
-    // const { userId, imageUrl, userName } = this.authService.getCurrentUser();
+    this.loading = true;
 
-    // this.loading = true;
-
-    // this.postService
-    //   .createPost({
-    //     creator: { userId, imageUrl, userName },
-    //     caption: this.caption,
-    //     file: this.file,
-    //     location: this.location,
-    //     tags: this.tags,
-    //   })
-    //   .subscribe(
-    //     () => {
-    //       this.router.navigate(['/']);
-    //       this.loading = false;
-    //     },
-    //     () => {
-    //       this.loading = false;
-    //     }
-    //   );
+    this.postService
+      .createPost({
+        creator: {
+          userId: this.user.userId,
+          imageUrl: this.user.imageUrl,
+          userName: this.user.userName,
+        },
+        caption: this.createPostForm.value.caption,
+        file: this.file,
+        location: this.createPostForm.value.location,
+        tags: this.createPostForm.value.tags,
+      })
+      .subscribe(
+        () => {
+          this.router.navigate(['/']);
+          this.loading = false;
+        },
+        () => {
+          this.loading = false;
+        }
+      );
   }
 
   handleCancel(): void {

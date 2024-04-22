@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/authService';
 import { UserService } from '../../../services/userService';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -23,37 +22,39 @@ export class UpdateProfileComponent {
   loading = false;
 
   constructor(
-    private authService: AuthService,
     private userService: UserService,
     private router: Router,
     private store: Store<{ auth: any }>
   ) {
-    // this.user = this.authService.getCurrentUser();
     this.auth$ = this.store.pipe(select('auth'));
     this.auth$.subscribe((auth) => {
       this.user = auth.user;
+      this.updateProfileForm.patchValue({
+        userName: auth.user.userName,
+        bio: auth.user.bio,
+      });
+      this.fileURL = auth.user.imageUrl;
     });
-    this.updateProfileForm.value.userName = this.user.userName;
-    this.updateProfileForm.value.bio = this.user.bio;
-    this.fileURL = this.user.imageUrl;
   }
 
   handleUpdateUser(): void {
-    // const userData = {
-    //   userName: this.userName,
-    //   bio: this.bio,
-    //   file: this.file,
-    // };
-    // this.loading = true;
-    // this.userService.updateUser(this.user.userId, userData).subscribe(
-    //   () => {
-    //     this.loading = false;
-    //     this.router.navigate(['/profile', this.user.userId]);
-    //   },
-    //   () => {
-    //     this.loading = false;
-    //   }
-    // );
+    const userData = {
+      userName: this.updateProfileForm.value.userName,
+      bio: this.updateProfileForm.value.bio,
+      file: this.file,
+      email: this.user.email,
+    };
+    this.loading = true;
+
+    this.userService.editUser(this.user.userId, userData).subscribe(
+      () => {
+        this.loading = false;
+        this.router.navigate(['/profile', this.user.userId]);
+      },
+      () => {
+        this.loading = false;
+      }
+    );
   }
 
   handleFileChange(event: any): void {
