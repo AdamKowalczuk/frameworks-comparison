@@ -29,9 +29,11 @@ export class PostService {
       .pipe(catchError((error) => throwError(error)));
   }
 
-  createPost(postData: INewPost): Observable<any> {
+  createPost(postData: any): Observable<any> {
     return this.http
-      .post<any>(`${env}/api/posts`, postData, { headers: this.getHeaders() })
+      .post<any>(`${env}/api/posts`, postData, {
+        headers: this.getHeaders(),
+      })
       .pipe(catchError((error) => throwError(error)));
   }
 

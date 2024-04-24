@@ -17,7 +17,7 @@ export class CreatePostComponent {
     location: new FormControl(''),
     tags: new FormControl(''),
   });
-  file: File[] | null = null;
+  file: any = null;
   fileURL: string | null = null;
   loading: boolean = false;
   auth$: Observable<any>;
@@ -48,27 +48,25 @@ export class CreatePostComponent {
 
     this.loading = true;
 
-    this.postService
-      .createPost({
-        creator: {
-          userId: this.user.userId,
-          imageUrl: this.user.imageUrl,
-          userName: this.user.userName,
-        },
-        caption: this.createPostForm.value.caption,
-        file: this.file,
-        location: this.createPostForm.value.location,
-        tags: this.createPostForm.value.tags,
-      })
-      .subscribe(
-        () => {
-          this.router.navigate(['/']);
-          this.loading = false;
-        },
-        () => {
-          this.loading = false;
-        }
-      );
+    const postData = new FormData();
+
+    postData.append('creator[userId]', this.user.userId);
+    postData.append('creator[imageUrl]', this.user.imageUrl);
+    postData.append('creator[userName]', this.user.userName);
+    postData.append('caption', this.createPostForm.value.caption);
+    postData.append('file', this.file ? this.file : '');
+    postData.append('location', this.createPostForm.value.location);
+    postData.append('tags', this.createPostForm.value.tags);
+
+    this.postService.createPost(postData).subscribe(
+      () => {
+        this.router.navigate(['/']);
+        this.loading = false;
+      },
+      () => {
+        this.loading = false;
+      }
+    );
   }
 
   handleCancel(): void {

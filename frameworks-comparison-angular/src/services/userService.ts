@@ -40,7 +40,7 @@ export class UserService {
       .pipe(catchError((error) => throwError(error)));
   }
 
-  editUser(userId: string, userData: IUser): Observable<any> {
+  editUser(userId: string, userData: any): Observable<any> {
     return this.http
       .put<any>(`${env}/api/users/${userId}`, userData, {
         headers: this.getHeaders(),

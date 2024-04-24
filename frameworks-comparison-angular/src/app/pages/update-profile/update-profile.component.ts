@@ -17,7 +17,7 @@ export class UpdateProfileComponent {
   });
   auth$: Observable<any>;
   user: any = null;
-  file: File | null = null;
+  file: any = null;
   fileURL: string | null = null;
   loading = false;
 
@@ -38,12 +38,11 @@ export class UpdateProfileComponent {
   }
 
   handleUpdateUser(): void {
-    const userData = {
-      userName: this.updateProfileForm.value.userName,
-      bio: this.updateProfileForm.value.bio,
-      file: this.file,
-      email: this.user.email,
-    };
+    const userData = new FormData();
+    userData.append('userName', this.updateProfileForm.value.userName);
+    userData.append('bio', this.updateProfileForm.value.bio);
+    userData.append('file', this.file ? this.file : '');
+
     this.loading = true;
 
     this.userService.editUser(this.user.userId, userData).subscribe(
