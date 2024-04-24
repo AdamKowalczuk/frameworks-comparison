@@ -11,7 +11,7 @@ import { FormControl } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   posts: IPost[] = [];
-  searchQuery: FormControl = new FormControl('');
+  searchQuery: string = '';
 
   isPostsLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts();
+  }
+
+  updateSearchQuery(query: any): void {
+    this.searchQuery = query;
   }
 
   getPosts(): void {
@@ -35,11 +39,9 @@ export class HomeComponent implements OnInit {
   }
 
   searchPosts(): void {
-    console.log('searchQuery', this.searchQuery.value);
-
     this.isPostsLoading.next(true);
-    if (this.searchQuery.value.length > 0) {
-      this.postService.searchPosts(this.searchQuery.value).subscribe(
+    if (this.searchQuery.length > 0) {
+      this.postService.searchPosts(this.searchQuery).subscribe(
         (response: any) => {
           this.posts = response.posts;
           this.isPostsLoading.next(false);

@@ -3,7 +3,7 @@
         <img src="../../../assets/icons/home-black.svg" alt="Saved icon">
       <h4>Home Page</h4>
     </div>
-    <app-search placeholder="Search" (onSearch)="searchPosts()" formControlName="searchQuery"></app-search>
+    <app-search placeholder="Search" (onSearch)="searchPosts()" (searchQueryChange)="updateSearchQuery($event)"></app-search>
     <ng-container *ngIf="isPostsLoading | async; else postsList">
       <app-loader></app-loader>
     </ng-container>

@@ -3,8 +3,8 @@
       type="search"
       class="input-search"
       [placeholder]="placeholder"
-      [(ngModel)]="value"
-      (input)="onChange(value)"
+      [(ngModel)]="searchQuery"
+      (input)="updateSearchQuery()"
       (keypress)="handleKeyPress($event)"
     />
     <img src="assets/icons/search.svg" alt="search" class="search-icon" />

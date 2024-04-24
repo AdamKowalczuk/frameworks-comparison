@@ -5,7 +5,7 @@ import {
   Output,
   forwardRef,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -19,38 +19,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class SearchComponent implements ControlValueAccessor {
+export class SearchComponent {
   @Input() placeholder: string = '';
 
   @Output() onSearch: EventEmitter<any> = new EventEmitter();
-  value: string | undefined;
-  disabled = false;
+  searchQuery: string = '';
 
-  onChange: any = (value: any) => {};
-  onTouched: any = () => {};
+  @Output() searchQueryChange: EventEmitter<string> =
+    new EventEmitter<string>();
 
-  writeValue(obj: any): void {
-    this.value = obj;
+  updateSearchQuery(): void {
+    this.searchQueryChange.emit(this.searchQuery);
   }
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
   handleKeyPress(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       event.preventDefault();
-      console.log(this.onSearch);
-
-      this.onSearch.emit(this.value ? this.value : '');
+      this.onSearch.emit(this.searchQuery);
     }
   }
 }
